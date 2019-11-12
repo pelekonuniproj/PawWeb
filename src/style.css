@@ -1,0 +1,99 @@
+/*
+    NavBar.vue
+*/
+
+.mynavbar {
+    background-color: #6666ff;
+}
+
+.mynavbarform {
+    margin-right: 10px;
+}
+
+.navtitle {
+    align-self: center;
+}
+
+/*
+    SideMenu.vue
+*/
+
+.side-menu {
+    width: 200px;
+    margin-left: 5px;
+    margin-top: 30px;
+}
+
+.sidemenu-item {
+    width: 200px;
+    margin-bottom: 5px;
+}
+
+/*
+    MainView.vue
+*/
+
+.main-content-card {
+    width: 18rem;
+}
+
+/*
+    BoardsListView.vue
+*/
+
+.boards-list {
+    margin-left: 10px;
+    margin-top: 30px;
+}
+
+.board-card {
+    width: 250px;
+    height: 80px;
+    margin-right: 20px;
+}
+
+.board-card-text {
+    margin-left: 5px;
+}
+
+/*
+    BoardView.vue
+*/
+
+.board-main {
+    background-color: yellowgreen;
+    width: 100%;
+    height: 100%;
+}
+
+.board-section {
+    background-color: gray;
+    width: 272px;
+    min-width: 40px;
+    margin-left: 10px;
+}
+
+.board-section-task-holder {
+    background-color: gray;
+    width: 272px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.board-section-title {
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.board-task {
+    margin-left: 8px;
+    background-color: #d9d9d9;
+    width: 256px;
+    height: 50px;
+
+    border-style: solid;
+}
+
+.board-task-title {
+    vertical-align: middle;
+}

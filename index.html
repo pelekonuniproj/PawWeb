@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="style.css"/>
+	</head>
+	<body>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+		<nav id="navBar" class="navbar navbar-light mynavbar">
+				<form class="form-inline">
+					<button type="button" class="btn btn-info mynavbarform" v-on:click="goToMainPage">{{ home }}</button>
+					<button type="button" class="btn btn-info mynavbarform" v-on:click="goToBoards">{{ storyboards }}</button>
+					<a class="navbar-brand navtitle">{{ title }}</a>
+				</form>
+				
+		</nav>
+
+		<div class="d-flex justify-content-start">
+			<nav id="sideMenu" class="side-menu" v-if="isVisible">
+				<ul class="nav flex-column">
+					<li class="nav-item">
+						<button class="btn btn-light sidemenu-item" type="button" v-on:click="sideMenuShowBoards">{{ boards }}</button>
+					</li>
+					<li class="nav-item">
+						<button class="btn btn-light sidemenu-item" type="button" v-on:click="sideMenuShowMain">{{ main }}</button>
+					</li>
+				</ul>
+			</nav>
+			<div id="mainApp">
+				<router-view class="maincontent"></router-view>
+			</div>
+		</div>
+
+		<script src="script.js"></script>
+	</body>
+</html>

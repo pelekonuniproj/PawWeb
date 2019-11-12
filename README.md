@@ -22,3 +22,12 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### Debug prints in console:
+
+```
+/* eslint-disable no-console */
+console.log("TEST 1");
+/* eslint-enable no-console */
+```
