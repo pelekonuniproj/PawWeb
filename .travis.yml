@@ -5,3 +5,13 @@ node_js:
 cache: npm
 
 script: npm run build
+branches:
+  only:
+    - master
+    - production
+deploy:
+  provider: heroku
+  api_key:
+    secure: $API_KEY
+  app: viewjs-paw
+  on: production
