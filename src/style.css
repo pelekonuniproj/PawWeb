@@ -66,6 +66,11 @@
     height: 100%;
 }
 
+.board-name-bar {
+    background-color: yellowgreen;
+    height: 50px;
+}
+
 .board-section {
     background-color: gray;
     width: 272px;
