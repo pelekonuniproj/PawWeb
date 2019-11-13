@@ -5,6 +5,7 @@
 					<button type="button" class="btn btn-info mynavbarform" v-on:click="goToMainPage">{{ home }}</button>
 					<button type="button" class="btn btn-info mynavbarform" v-on:click="goToBoards">{{ storyboards }}</button>
 					<a class="navbar-brand navtitle">{{ title }}</a>
+          <button type="button" class="btn btn-light" v-on:click="showCreateNewBoard"> + </button>
 				</form>
 				
 		</nav>
@@ -32,6 +33,10 @@ export default {
         if (this.$router.current != "/") {
           this.$router.push('/')
         }
+    },
+
+    showCreateNewBoard: function() {
+      this.$emit("new-board")
     }
   }
 }
