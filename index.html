@@ -19,7 +19,7 @@
 
 </nav>
 
-<div class="d-flex justify-content-start root">
+<div class="justify-content-start root">
     <nav id="sideMenu" class="side-menu" v-if="isVisible">
         <ul class="nav flex-column">
             <li class="nav-item">
@@ -32,8 +32,8 @@
             </li>
         </ul>
     </nav>
-    <div id="mainApp">
-        <router-view class="maincontent"></router-view>
+    <div id="mainApp" class="d-flex">
+        <router-view class="d-flex maincontent"></router-view>
     </div>
 </div>
 
