@@ -74,6 +74,7 @@ body {
     margin-top: 20px;
     margin-left: 10px;
     padding-bottom: 5px;
+    flex: 0 0 272px;
 }
 
 .board-section-task-holder {
