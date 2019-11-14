@@ -62,6 +62,10 @@ body {
     height: 100%;
 }
 
+.boards-list {
+    flex-wrap: wrap;
+}
+
 .board-section {
     background-color: #e9e4e6;
     border-radius: 5px;
