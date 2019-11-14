@@ -2,10 +2,10 @@
   <div class="navbar-main">
     <nav id="navBar" class="navbar navbar-light mynavbar">
 				<form class="form-inline">
-					<button type="button" class="btn btn-info mynavbarform" v-on:click="goToMainPage">{{ home }}</button>
-					<button type="button" class="btn btn-info mynavbarform" v-on:click="goToBoards">{{ storyboards }}</button>
+					<button type="button" class="btn btn-info my-button mynavbarform" v-on:click="goToMainPage">{{ home }}</button>
+					<button type="button" class="btn btn-info my-button  mynavbarform" v-on:click="goToBoards">{{ storyboards }}</button>
 					<a class="navbar-brand navtitle">{{ title }}</a>
-          <button type="button" class="btn btn-light" v-on:click="showCreateNewBoard"> + </button>
+          <button type="button" class="btn btn-info my-button  btn-add" v-on:click="showCreateNewBoard"> + </button>
 				</form>
 				
 		</nav>
