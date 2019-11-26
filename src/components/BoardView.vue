@@ -10,6 +10,7 @@
 <script>
 import BoardSection from './BoardSection.vue'
 import BoardTitleBar from './BoardTitleBar.vue'
+import { ApiClient } from '../Api/ApiClient'
 
 export default {
     name: 'BoardView',
@@ -39,6 +40,13 @@ export default {
 
     methods: {
 
-    },
+	},
+	
+	mounted() {
+		var self = this
+		ApiClient.getBoardDetails(this.$route.params.user, this.$route.params.boardname, function(response) {
+			self.sections = response
+		})
+	}
 }
 </script>

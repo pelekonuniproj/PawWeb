@@ -1,5 +1,10 @@
 # pawweb
 
+## Dependency setup
+```
+npm install --save axios vue-axios
+```
+
 ## Project setup
 ```
 npm install
