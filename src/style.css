@@ -156,6 +156,21 @@
 }
 
 /*
+    LoginPage
+*/
+
+.my-label {
+    color: white;
+    font-weight: bold;
+}
+
+.my-dark-button {
+    background-color: #048998;
+    border-width: 0;
+    font-weight: bold;
+}
+
+/*
     Mess
 */
 
