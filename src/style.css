@@ -27,7 +27,25 @@
     border-width: 0;
     font-weight: bold;
 }
+.add-list{
+    background-color: #e9e4e6;
+    border-radius: 5px;
+    width: 272px;
+    height: auto;
+    min-width: 40px;
+    margin-top: 20px;
+    margin-left: 10px;
+    flex: 0 0 272px;
+    display: none;
+}
 
+.add-list-form{
+    background: #FFFFFF;
+    border: 2px solid lightblue;
+    border-radius: 5px;
+    width: 260px;
+    margin: 6px;
+}
 /*
     SideMenu.vue
 */
@@ -124,6 +142,23 @@
 /*
     NewBoardView.vue
 */
+.add-list-button-form{
+    margin: 6px;
+    background-color: lightblue;
+    border: none;
+}
+
+.add-list-button{
+    height: 20%;
+    min-width: 40px;
+    margin-top: 20px;
+    margin-left: 10px;
+    padding-bottom: 5px;
+    width: 272px;
+    background-color: rgba(255,255,255, 0.5);
+    border: none;
+    color:white;
+}
 
 .my-modal-backdrop {
     position: fixed;
