@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="add-list" id="showForm">
+        <div class="add-list" id="showFormAddList">
             <form>
                 <input type="text" class="add-list-form" placeholder="Wprowadź tytuł listy">
             </form>
@@ -20,11 +20,11 @@
         methods: {
             showForm() {
                 document.getElementById("showButton").style.display = "none"
-                document.getElementById("showForm").style.display = "block"
+                document.getElementById("showFormAddList").style.display = "block"
             },
             hideForm() {
                 document.getElementById("showButton").style.display = "block"
-                document.getElementById("showForm").style.display = "none"
+                document.getElementById("showFormAddList").style.display = "none"
             }
         }
     }

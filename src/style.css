@@ -38,6 +38,40 @@
     flex: 0 0 272px;
     display: none;
 }
+.add-card{
+    background-color: #e9e4e6;
+    border-radius: 5px;
+    width: 260px;
+    height: auto;
+    min-width: 40px;
+    flex: 0 0 272px;
+    display: none;
+}
+
+.copy-list{
+    background-color: #e9e4e6;
+    border-radius: 5px;
+    width: 260px;
+    height: auto;
+    min-width: 40px;
+    display: none;
+}
+
+.copy-list-form{
+    background: #FFFFFF;
+    border: 2px solid lightblue;
+    border-radius: 5px;
+    width: 250px;
+    margin: 6px;
+}
+
+.add-card-form{
+    background: #FFFFFF;
+    border: 2px solid lightblue;
+    border-radius: 5px;
+    width: 250px;
+    margin: 6px;
+}
 
 .add-list-form{
     background: #FFFFFF;
@@ -143,6 +177,12 @@
     NewBoardView.vue
 */
 .add-list-button-form{
+    margin: 6px;
+    background-color: lightblue;
+    border: none;
+}
+
+.copy-list-button-form{
     margin: 6px;
     background-color: lightblue;
     border: none;
