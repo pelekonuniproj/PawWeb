@@ -5,10 +5,10 @@
                 <input type="text" class="add-list-form" placeholder="Wprowadź tytuł listy">
             </form>
             <button type="button" class="btn btn-light add-list-button-form">Dodaj Listę</button>
-            <button type="button" v-on:click="hideForm" class="btn btn-light add-list-button-form">Anuluj</button>
+            <button type="button" v-on:click="showForm" class="btn btn-light add-list-button-form">Anuluj</button>
         </div>
         <div id="addlistbutton">
-            <button id="showButton" v-on:click="showForm()" type="button" class="btn btn-light add-list-button">
+            <button id="showButton" v-on:click="showForm" type="button" class="btn btn-light add-list-button">
                 Dodaj kolejną listę
             </button>
         </div>
@@ -19,13 +19,14 @@
     export default {
         methods: {
             showForm() {
-                document.getElementById("showButton").style.display = "none"
-                document.getElementById("showFormAddList").style.display = "block"
+                if (this.$el.querySelector("#showButton").style.display === "none") {
+                    this.$el.querySelector("#showButton").style.display = "block"
+                    this.$el.querySelector("#showFormAddList").style.display = "none"
+                } else {
+                    this.$el.querySelector("#showButton").style.display = "none"
+                    this.$el.querySelector("#showFormAddList").style.display = "block"
+                }
             },
-            hideForm() {
-                document.getElementById("showButton").style.display = "block"
-                document.getElementById("showFormAddList").style.display = "none"
-            }
         }
     }
 </script>
