@@ -21,20 +21,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group details-group">
-                            <div class="row">
-                                <span>
-                                    <span id="user" class="user-span">Użytkownik</span> <span id="comment" class="comment-span"> utworzył zadanie</span>
-                                </span>
-                            </div>
-                            <div class="row">
-                                <span>
-                                    <span class="data-span">dnia </span><span id="date" class="data-span">13.12.2019</span>
-                                </span>
-                            </div>
-                        </div>
+                        <Detail class="form-group details-group" v-for="detail in detailsList" v-bind:key="detail.id"
+                                v-bind:comment="detail.comment" v-bind:date="detail.date" v-bind:user="detail.user" />
                     </form>
-
                 </div>
             </div>
         </div>
@@ -42,12 +31,28 @@
 </template>
 
 <script>
+
+    import Detail from './Detail.vue'
+
     export default {
         name: "Details",
+        components: {
+            Detail
+        },
+
+        data: () => ({
+            detailsList: [
+                {id: 1, date: "14.12.2019", comment: "zmienił nazwę", user: "Inny użytkownik"},
+                {id: 2, date: "13.12.2019", comment: "utworzył zadanie", user: "Użytkownik"},
+            ],
+        }),
+
     }
+
 </script>
 
 <style scoped>
+
     .details-dialog {
         width: 460px;
         padding: 20px;
@@ -55,12 +60,5 @@
     .details-group {
         margin-left: 20px;
     }
-    .user-span {
-        font-weight: bold;
-    }
-    .comment-span {
-    }
-    .data-span {
-        font-size: 14px;
-    }
+
 </style>
