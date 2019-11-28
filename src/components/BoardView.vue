@@ -2,7 +2,8 @@
 	<div>
 		<BoardTitleBar v-bind:boardName="$route.params.boardname"/>
 	<div class="board-main d-flex flex-row">
-    <BoardSection v-for="section in sections" v-bind:key="section.id" v-bind:sectionName="section.name" v-bind:tasksList="section.taskList"/>
+		<BoardSection v-for="section in sections" v-bind:key="section.id" v-bind:sectionName="section.name" v-bind:tasksList="section.taskList"/>
+		<AddList></AddList>
     </div>
 	</div>
 </template>
@@ -10,10 +11,12 @@
 <script>
 import BoardSection from './BoardSection.vue'
 import BoardTitleBar from './BoardTitleBar.vue'
+import AddList from "./AddList"
 
 export default {
     name: 'BoardView',
     components: {
+		AddList,
 		BoardSection,
 		BoardTitleBar,
     },
