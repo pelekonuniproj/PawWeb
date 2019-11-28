@@ -1,34 +1,4 @@
 /*
-    NavBar.vue
-*/
-
-.mynavbar {
-    background-color: #048998;
-    height: 60px;
-    color: white;
-    font-weight: bold;
-}
-
-.mynavbarform {
-    margin-right: 10px;
-}
-
-.navtitle {
-    align-self: center;
-}
-
-.btn-add {
-    background: none;
-    border: none;
-}
-
-.my-button {
-    background-color: #3bb4c1;
-    border-width: 0;
-    font-weight: bold;
-}
-
-/*
     SideMenu.vue
 */
 
