@@ -51,3 +51,23 @@
         },
     }
 </script>
+
+<style scoped>
+
+    .login-label {
+        color: white;
+        font-weight: bold;
+    }
+
+    .login-button {
+        background-color: #048998;
+        border-width: 0;
+        font-weight: bold;
+    }
+
+    .login-title-label {
+        font-size: 32px;
+        color: white;
+    }
+
+</style>

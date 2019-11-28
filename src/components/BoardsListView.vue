@@ -34,3 +34,22 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+
+    .board-card {
+        width: 250px;
+        flex: 0 0 250px;
+        height: 80px;
+        margin: 20px;
+    }
+
+    .board-card-text {
+        margin-left: 5px;
+    }
+
+    .boards-list {
+        flex-wrap: wrap;
+    }
+
+</style>
