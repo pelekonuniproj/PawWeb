@@ -187,6 +187,10 @@
     border: none;
 }
 
+.div-text{
+    margin: 5px;
+}
+
 .copy-list-button-form{
     margin: 6px;
     background-color: lightblue;

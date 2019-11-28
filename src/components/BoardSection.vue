@@ -21,10 +21,14 @@
                         Obserwuj
                     </button>
                     <hr>
+                    <button class="dropdown-item" v-on:click="handleSortAllCards" id="sort-button" type="button">
+                        Sortuj według...
+                    </button>
+                    <hr>
                     <button class="dropdown-item" v-on:click="handleMoveAllCards" type="button">
                         Przenieś wszystkie kart w tej liście...
                     </button>
-                    <button class="dropdown-item" type="button">Zarchiwizuj wszystkie karty w tej liście...</button>
+                    <button class="dropdown-item" v-on:click="handleArchiveAllCards" type="button">Zarchiwizuj wszystkie karty w tej liście...</button>
                     <hr>
                     <button class="dropdown-item" type="button">Zarchiwizuj tę listę</button>
                 </div>
@@ -118,7 +122,47 @@
                     <div id="buttons-move-all-cards">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-light copy-list-button-form">Przenieś</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" tabindex="-1" id="archiveAllCards" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <div style="text-align: center;">Zarchiwizować wszystkie karty z...</div>
+                        </h5>
+                        <button type="button" class="close" v-on:click="handleArchiveAllCards" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="div-text">
+                        Ta opcja usunie wszystkie karty z listy na tablicy. Żeby zobaczyć zarchiwizowane karty i je przywrócić, kliknij "Menu" > "Zarchiwizowane karty"
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-outline-danger copy-list-button-form">Zarchiwizuj wszystko</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" tabindex="-1" id="sortAllCards" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <div style="text-align: center;">Przenieś listę</div>
+                        </h5>
+                        <button type="button" class="close" v-on:click="handleSortAllCards" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <button class="btn-move-all-cards btn-light">Data utworzenia (od najnowszych)</button>
+                    <button class="btn-move-all-cards btn-light">Data utworzenia (od najstarszych)</button>
+                    <button class="btn-move-all-cards btn-light">Nazwy kart (alfabetycznie)</button>
+                    <div class="modal-footer">
                     </div>
                 </div>
             </div>
@@ -177,6 +221,20 @@
                     button.innerHTML = this.sectionName + "(aktualny)";
                     this.$el.querySelector("#moveAllCards").style.display = "block"
                     this.$el.querySelector("#buttons-move-all-cards").appendChild(button)
+                }
+            },
+            handleArchiveAllCards() {
+                if (this.$el.querySelector("#archiveAllCards").style.display === "block") {
+                    this.$el.querySelector("#archiveAllCards").style.display = "none"
+                } else {
+                    this.$el.querySelector("#archiveAllCards").style.display = "block"
+                }
+            },
+            handleSortAllCards() {
+                if (this.$el.querySelector("#sortAllCards").style.display === "block") {
+                    this.$el.querySelector("#sortAllCards").style.display = "none"
+                } else {
+                    this.$el.querySelector("#sortAllCards").style.display = "block"
                 }
             }
         },
