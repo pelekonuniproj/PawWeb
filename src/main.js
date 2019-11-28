@@ -11,6 +11,7 @@ import './style.css'
 import HomePage from './components/HomePage.vue'
 import BoardView from './components/Board/BoardView.vue'
 import LoginPage from './components/LoginPage.vue'
+import { UserStore } from './DataHolders/User'
 
 Vue.config.productionTip = false;
 
@@ -23,6 +24,11 @@ let router = new Router({
     {
       path: '',
       component: HomePage,
+      beforeEnter: (to, from, next) => {
+          if (!UserStore.isLoggedIn()) {
+            router.push("/login")
+          }
+      }
     },
     {
       path: '/b/:user/:boardname',
