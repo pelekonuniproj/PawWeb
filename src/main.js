@@ -10,6 +10,7 @@ import './style.css'
 
 import HomePage from './components/HomePage.vue'
 import BoardView from './components/BoardView.vue'
+import LoginPage from './components/LoginPage.vue'
 
 Vue.config.productionTip = false;
 
@@ -28,9 +29,13 @@ let router = new Router({
       component: BoardView,
     },
     {
+      path: '/login',
+      component: LoginPage,
+    },
+    {
       path: '*',
       redirect: '/',
-    }
+    },
   ]
 });
 
