@@ -183,7 +183,7 @@ import { ApiClient } from '../Api/ApiClient'
             BoardTask,
         },
         
-        props: ['sectionName', 'tasksList'],
+        props: ['sectionName', 'tasksList', 'id'],
         
         data: function () {
             return {
@@ -193,11 +193,11 @@ import { ApiClient } from '../Api/ApiClient'
         },
         
         mounted() {
-        var self = this
-        ApiClient.getTasksForBoardSection(this.id, function(response) {
-            self.tasks = response
-        })
-    }
+            var self = this
+            ApiClient.getTasksForBoardSection(this.id, function(response) {
+                self.tasks = response
+            })
+        },
         
         methods: {
             handleShowAddCard() {
