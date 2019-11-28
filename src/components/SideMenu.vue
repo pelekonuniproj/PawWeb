@@ -34,3 +34,17 @@ export default {
 }
 
 </script>
+
+<style scoped>
+	.side-menu {
+		width: 200px;
+		margin-left: 5px;
+		margin-top: 30px;
+		float: left;
+	}
+
+	.sidemenu-item {
+		width: 100%;
+		margin-bottom: 5px;
+	}
+</style>
