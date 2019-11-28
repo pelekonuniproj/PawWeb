@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css'
 
 import HomePage from './components/HomePage.vue'
-import BoardView from './components/BoardView.vue'
+import BoardView from './components/Board/BoardView.vue'
 import LoginPage from './components/LoginPage.vue'
 
 Vue.config.productionTip = false;

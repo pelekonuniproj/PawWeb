@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import BoardSection from './BoardSection.vue'
-import BoardTitleBar from './BoardTitleBar.vue'
-import AddList from "./AddList"
-import { ApiClient } from '../Api/ApiClient'
+import BoardSection from './Lists/BoardSection.vue'
+import BoardTitleBar from '../BoardTitleBar.vue'
+import AddList from "./Lists/AddList"
+import { ApiClient } from '../../Api/ApiClient'
 
 export default {
     name: 'BoardView',
