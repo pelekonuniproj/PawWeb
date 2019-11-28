@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import App from './App.vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import 'bootstrap'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -13,6 +15,7 @@ import LoginPage from './components/LoginPage.vue'
 Vue.config.productionTip = false;
 
 Vue.use(Router);
+Vue.use(VueAxios, axios)
 
 let router = new Router({
   mode: 'history',

@@ -8,7 +8,7 @@
 export default {
     name: "BoardTask",
 
-    props: ['name', 'id'],
+    props: ['name', 'id', 'desc'],
 
     methods: {
         showTask(id) {

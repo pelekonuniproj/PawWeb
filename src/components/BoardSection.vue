@@ -167,24 +167,38 @@
                 </div>
             </div>
         </div>
-        <BoardTask class="d-flex flex-column board-section-task-holder" v-for="task in tasksList" v-bind:key="task.id"
-                   v-bind:name="task.name" v-bind:id="task.id"/>
+        
+        <BoardTask class="d-flex flex-column board-section-task-holder" v-for="task in tasks" v-bind:key="task.id"
+                    v-bind:name="task.title" v-bind:id="task.id" v-bind:desc="task.description" />
     </div>
 </template>
 
 <script>
-    import BoardTask from './BoardTask.vue'
+import BoardTask from './BoardTask.vue'
+import { ApiClient } from '../Api/ApiClient'
 
     export default {
         name: "BoardSection",
         components: {
             BoardTask,
         },
+        
+        props: ['sectionName', 'tasksList'],
+        
         data: function () {
             return {
-                buttons_added: false
+                buttons_added: false,
+                 tasks: []
             }
         },
+        
+        mounted() {
+        var self = this
+        ApiClient.getTasksForBoardSection(this.id, function(response) {
+            self.tasks = response
+        })
+    }
+        
         methods: {
             handleShowAddCard() {
                 this.$el.querySelector("#showForm")
@@ -245,10 +259,7 @@
                     this.$el.querySelector("#sortAllCards").style.display = "block"
                 }
             }
-        },
-
-
-        props: ['sectionName', 'tasksList'],
+        },        
     }
 </script>
 <style scoped>
