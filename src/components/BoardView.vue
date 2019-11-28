@@ -42,3 +42,12 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+
+	.board-main {
+		width: 100%;
+		height: 100%;
+	}
+
+</style>

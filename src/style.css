@@ -1,84 +1,6 @@
 /*
-    NavBar.vue
-*/
-
-.mynavbar {
-    background-color: #048998;
-    height: 60px;
-    color: white;
-    font-weight: bold;
-}
-
-.mynavbarform {
-    margin-right: 10px;
-}
-
-.navtitle {
-    align-self: center;
-}
-
-.btn-add {
-    background: none;
-    border: none;
-}
-
-.my-button {
-    background-color: #3bb4c1;
-    border-width: 0;
-    font-weight: bold;
-}
-
-/*
-    SideMenu.vue
-*/
-
-.side-menu {
-    width: 200px;
-    margin-left: 5px;
-    margin-top: 30px;
-    float: left;
-}
-
-.sidemenu-item {
-    width: 100%;
-    margin-bottom: 5px;
-}
-
-/*
-    MainView.vue
-*/
-
-.main-content-card {
-    width: 18rem;
-}
-
-/*
-    BoardsListView.vue
-*/
-
-.board-card {
-    width: 250px;
-    flex: 0 0 250px;
-    height: 80px;
-    margin: 20px;
-}
-
-.board-card-text {
-    margin-left: 5px;
-}
-
-.boards-list {
-    flex-wrap: wrap;
-}
-
-/*
     BoardView.vue
 */
-
-.board-main {
-    width: 100%;
-    height: 100%;
-}
 
 .board-name-bar {
     margin-top: 20px;
@@ -122,8 +44,12 @@
 }
 
 /*
-    NewBoardView.vue
+    Mess
 */
+
+.main-content-card {
+    width: 18rem;
+}
 
 .my-modal-backdrop {
     position: fixed;
@@ -154,30 +80,6 @@
 .modal-fade-leave-active {
     transition: opacity .5s ease
 }
-
-/*
-    LoginPage
-*/
-
-.login-label {
-    color: white;
-    font-weight: bold;
-}
-
-.login-button {
-    background-color: #048998;
-    border-width: 0;
-    font-weight: bold;
-}
-
-.login-title-label {
-    font-size: 32px;
-    color: white;
-}
-
-/*
-    Mess
-*/
 
 body {
     background-color: #3bb4c1;
