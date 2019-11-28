@@ -9,7 +9,7 @@ class Api {
 
     getBoardsForUser(callBack) {
         const endpoint = this.apiHost + "/board";
-        const authValue = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJpc3MiOiJRV0UiLCJleHAiOjE1NzQ4ODY3MTd9.RIWmVF6OoO-3SwHPdZrAHx9hHya4QtHjKkMIHGxAOQo"
+        const authValue = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJpc3MiOiJRV0UiLCJleHAiOjE1NzUwMjcwMTJ9.6vj50ydO_GyZzI5yCWwLkcsAyjn2JsiXsUJviSKtQlU"
         const headers = {
             headers: {
                 'Authorization': authValue,
@@ -23,14 +23,19 @@ class Api {
         })
     }
 
-    getBoardsForTeam(teamId, callback) {
-        var endpoint = this.apiHost + "/board/all/" + teamId;
-        Vue.axios.get(endpoint).then(response => callback(response.data))
-    }
+    // getBoardsForTeam(teamId, callback) {
+    //     var endpoint = this.apiHost + "/board/all/" + teamId;
+    //     Vue.axios.get(endpoint).then(response => callback(response.data))
+    // }
 
     getBoardDetails(ownerName, boardName, callback) {
         var endpoint = this.apiHost + "/board/" + ownerName + "/" + boardName
-        Vue.axios.get(endpoint).then(response => callback(response.data))
+        Vue.axios.get(endpoint).then(response => callback(response.data[0]))
+    }
+
+    getTasksForBoardSection(sectionId, callBack) {
+        var endpoint = this.apiHost + "/card/all/" + sectionId
+        Vue.axios.get(endpoint).then(response => callBack(response.data))
     }
 }
 
