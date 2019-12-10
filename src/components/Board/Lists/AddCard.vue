@@ -2,7 +2,7 @@
     <div>
         <div class="add-card" id="showFormAddCard">
             <form>
-                <input type="text" class="add-card-form" placeholder="Wprowadź tytuł listy">
+                <input type="text" class="add-card-form" placeholder="Wprowadź tytuł karty">
             </form>
             <button type="button" class="btn btn-light add-card-form-button">Dodaj Kartę</button>
             <button type="button" v-on:click="showForm" class="btn btn-light add-card-form-button">Anuluj</button>
