@@ -18,6 +18,19 @@ class User {
     isLoggedIn() {
         return this.isLogged;
     }
+
+    setToken(token) {
+        this.userToken = token
+        this.isLogged = true
+    }
+
+    getToken() {
+        return this.userToken
+    }
+
+    setUserName(name) {
+        this.userName = name
+    }
 }
 
 let UserStore = new User();

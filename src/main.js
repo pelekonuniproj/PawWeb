@@ -26,6 +26,9 @@ let router = new Router({
       component: HomePage,
       beforeEnter: (to, from, next) => {
           if (!UserStore.isLoggedIn()) {
+            /* eslint-disable no-console */
+            console.log(to, from, next)
+            /* eslint-enable no-console */
             router.push("/login")
           }
       }

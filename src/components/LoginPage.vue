@@ -5,13 +5,13 @@
             <form>
                 <div class="form-group">
                     <label class="login-label" for="inputLoginLogin">Login</label>
-                    <input type="text" class="form-control" id="inputLoginLogin" placeholder="Wpisz swój login">
+                    <input type="text" class="form-control" id="inputLoginLogin" placeholder="Wpisz swój login" v-model="userName">
                 </div>
                 <div class="form-group">
                     <label class="login-label" for="inputLoginPassword">Hasło</label>
-                    <input type="password" class="form-control" id="inputLoginPassword" placeholder="Wpisz swoje hasło">
+                    <input type="password" class="form-control" id="inputLoginPassword" placeholder="Wpisz swoje hasło" v-model="pass">
                 </div>
-                <button type="submit" class="btn btn-info login-button">Zaloguj</button>
+                <button type="button" class="btn btn-info login-button" v-on:click="tryLoggingIn">Zaloguj</button>
             </form>
         </div>
         <div class="col-4 offset-1">
@@ -36,6 +36,8 @@
 </template>
 
 <script>
+    import { ApiClient } from '../Api/ApiClient'
+    import { UserStore } from '../DataHolders/User'
 
     export default {
         name: 'LoginPage',
@@ -43,11 +45,38 @@
         },
 
         data: () => ({
-
+            userName: "",
+            pass: "",
         }),
 
         methods: {
+            tryLoggingIn() {
+                /* eslint-disable no-console */
+                    console.log("Usage");
+                    /* eslint-enable no-console */
+                var self = this
+                ApiClient.loginUser(this.userName, this.pass, function(response){
+                    UserStore.setToken(response.access_token)
+                    UserStore.setUserName(self.userName)
+                    self.forwardToMainPage()
+                    /* eslint-disable no-console */
+                    console.log("On success");
+                    console.log(response)
+                    /* eslint-enable no-console */
+                }, function(){
+                    /* eslint-disable no-console */
+                    console.log("On fail");
+                    /* eslint-enable no-console */
+                })
+            },
 
+            registerUser() {
+
+            },
+
+            forwardToMainPage() {
+                this.$router.push('/')
+            }
         },
     }
 </script>

@@ -1,6 +1,6 @@
 // https://play-rest-api-paw.herokuapp.com/
 import Vue from 'vue'
-//import { UserStore } from '../DataHolders/User'
+import { UserStore } from '../DataHolders/User'
 
 class Api {
     constructor() {
@@ -9,7 +9,7 @@ class Api {
 
     getBoardsForUser(callBack) {
         const endpoint = this.apiHost + "/board";
-        const authValue = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJpc3MiOiJRV0UiLCJleHAiOjE1NzUwMjcwMTJ9.6vj50ydO_GyZzI5yCWwLkcsAyjn2JsiXsUJviSKtQlU"
+        const authValue = "Bearer " + UserStore.getToken()
         const headers = {
             headers: {
                 'Authorization': authValue,
@@ -36,6 +36,15 @@ class Api {
     getTasksForBoardSection(sectionId, callBack) {
         var endpoint = this.apiHost + "/card/all/" + sectionId
         Vue.axios.get(endpoint).then(response => callBack(response.data))
+    }
+
+    loginUser(userName, userPass, onSuccess, onFail) {
+        var endpoint = this.apiHost + "/login"
+        
+        Vue.axios.post(endpoint, {
+            'login': userName,
+            'password': userPass,
+        }).then(response => onSuccess(response.data)).catch(onFail())
     }
 }
 
