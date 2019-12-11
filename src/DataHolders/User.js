@@ -1,9 +1,10 @@
 
 class User {
     constructor() {
-        this.userName = 'qwe'
-        this.userToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJpc3MiOiJRV0UiLCJleHAiOjE1NzQ3OTI4Nzd9.hk6Sx0A-ylEcKrTfHfhosUnpFB0G3mIhFgYE7ldpHlk"
+        this.userName = ""
+        this.userToken = ""
         this.hasAdminRights = true
+        this.isLogged = false
     }
 
     getCurrentUser() {
@@ -12,6 +13,23 @@ class User {
 
     isAdmin() {
         return this.hasAdminRights;
+    }
+
+    isLoggedIn() {
+        return this.isLogged;
+    }
+
+    setToken(token) {
+        this.userToken = token
+        this.isLogged = true
+    }
+
+    getToken() {
+        return this.userToken
+    }
+
+    setUserName(name) {
+        this.userName = name
     }
 }
 
