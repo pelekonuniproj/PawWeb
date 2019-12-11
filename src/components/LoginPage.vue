@@ -51,21 +51,17 @@
 
         methods: {
             tryLoggingIn() {
-                /* eslint-disable no-console */
-                    console.log("Usage");
-                    /* eslint-enable no-console */
                 var self = this
                 ApiClient.loginUser(this.userName, this.pass, function(response){
                     UserStore.setToken(response.access_token)
                     UserStore.setUserName(self.userName)
-                    self.forwardToMainPage()
                     /* eslint-disable no-console */
-                    console.log("On success");
-                    console.log(response)
+                    console.log("On login success");
                     /* eslint-enable no-console */
+                    self.forwardToMainPage()
                 }, function(){
                     /* eslint-disable no-console */
-                    console.log("On fail");
+                    console.log("On login fail");
                     /* eslint-enable no-console */
                 })
             },
@@ -75,7 +71,7 @@
             },
 
             forwardToMainPage() {
-                this.$router.push('/')
+                this.$router.push("/")
             }
         },
     }

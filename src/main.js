@@ -23,13 +23,14 @@ let router = new Router({
   routes: [
     {
       path: '',
+      name: 'home',
       component: HomePage,
       beforeEnter: (to, from, next) => {
           if (!UserStore.isLoggedIn()) {
-            /* eslint-disable no-console */
-            console.log(to, from, next)
-            /* eslint-enable no-console */
             router.push("/login")
+          }
+          else {
+            next()
           }
       }
     },
