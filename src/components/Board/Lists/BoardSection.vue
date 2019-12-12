@@ -10,6 +10,7 @@
         <component v-bind:is="componentName" @show="close"/>
         <BoardTask class="d-flex flex-column board-section-task-holder" v-for="task in tasks" v-bind:key="task.id"
                     v-bind:name="task.title" v-bind:id="task.id" v-bind:desc="task.description" />
+        <AddCard/>
     </div>
 </template>
 
@@ -23,10 +24,12 @@ import EditListMenu from "./Menu/EditListMenu";
 import MoveAllCardsMenuItem from "./Menu/MoveAllCardsMenuItem";
 import MoveListMenuItem from "./Menu/MoveListMenuItem";
 import SortAllCardsMenuItem from "./Menu/SortAllCardsMenuItem";
+import AddCard from "./AddCard";
 
     export default {
         name: "BoardSection",
         components: {
+            AddCard,
             SortAllCardsMenuItem,
             MoveListMenuItem,
             MoveAllCardsMenuItem,
