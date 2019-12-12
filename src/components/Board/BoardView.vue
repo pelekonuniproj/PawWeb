@@ -2,8 +2,10 @@
 	<div>
 		<BoardTitleBar v-bind:boardName="boardName"/>
 	<div class="board-main d-flex flex-row">
-		<BoardSection v-for="section in sections" v-bind:key="section.id" v-bind:sectionName="section.name" v-bind:id="section.id"/>
-		<AddList></AddList>
+		<draggable v-model="sections" @end="didDrag" class="board-main d-flex flex-row">
+			<BoardSection v-for="section in sections" v-bind:key="section.id" v-bind:sectionName="section.name" v-bind:id="section.id"/>
+			<AddList></AddList>
+		</draggable>
     </div>
 	</div>
 </template>
@@ -13,6 +15,7 @@ import BoardSection from './Lists/BoardSection.vue'
 import BoardTitleBar from '../BoardTitleBar.vue'
 import AddList from "./Lists/AddList"
 import { ApiClient } from '../../Api/ApiClient'
+import draggable from 'vuedraggable'
 
 export default {
     name: 'BoardView',
@@ -20,6 +23,7 @@ export default {
 		AddList,
 		BoardSection,
 		BoardTitleBar,
+		draggable,
     },
 
     data: () => ({
@@ -27,9 +31,14 @@ export default {
 		boardId: null,
 		boardName: "",
     }),
-
+	// https://github.com/SortableJS/Vue.Draggable
     methods: {
-
+		didDrag() {
+			/* eslint-disable no-console */
+			console.log("List Order Changed!");
+			console.log(this.sections);
+             /* eslint-enable no-console */
+		},
 	},
 	
 	mounted() {
