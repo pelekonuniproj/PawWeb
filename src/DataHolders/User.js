@@ -1,8 +1,10 @@
 
 class User {
     constructor() {
-        this.userName = 'pelekon'
+        this.userName = ""
+        this.userToken = ""
         this.hasAdminRights = true
+        this.isLogged = false
     }
 
     getCurrentUser() {
@@ -11,6 +13,23 @@ class User {
 
     isAdmin() {
         return this.hasAdminRights;
+    }
+
+    isLoggedIn() {
+        return this.isLogged;
+    }
+
+    setToken(token) {
+        this.userToken = token
+        this.isLogged = true
+    }
+
+    getToken() {
+        return this.userToken
+    }
+
+    setUserName(name) {
+        this.userName = name
     }
 }
 
