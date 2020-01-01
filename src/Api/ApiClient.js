@@ -47,6 +47,17 @@ class Api {
         }).then(response => onSuccess(response.data)).catch(onFail())
     }
 
+    registerUser(userName, userPassword) {
+        var endpoint = this.apiHost + "/user";
+        Vue.axios.post(endpoint, JSON.stringify({
+            name: userName,
+            surname: "empty",
+            login: userName,
+            password: userPassword,
+            email: "empty@empty.com"
+        }))
+    }
+
     createCard(listId, title, description, labelId, numberOnList, onSuccess, onFail) {
         var endpoint = this.apiHost + "/card"
 
