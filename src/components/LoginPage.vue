@@ -74,7 +74,14 @@
                 if (this.password.length >= 3) {
 
                     if (this.password === this.repeatedPassword) {
-                        ApiClient.registerUser(this.newUserName, this.password)
+                        ApiClient.registerUser(this.newUserName, this.password, function(){
+                            /* eslint-disable no-console */
+                            console.log("On register success");
+                            alert("Rejestracja przebiegła pomyślnie");
+                        }, function(response){
+                            /* eslint-disable no-console */
+                            console.log("Rejestracja nieudana" + response);
+                        })
                     } else {
                         alert("Hasła różnią się.")
                     }
