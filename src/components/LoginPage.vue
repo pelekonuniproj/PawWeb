@@ -16,20 +16,20 @@
         </div>
         <div class="col-4 offset-1">
             <label class="login-title-label">Zarejestruj</label>
-            <form>
+            <form action="">
                 <div class="form-group">
                     <label class="login-label" for="inputRegistrationLogin">Login</label>
-                    <input type="text" class="form-control" id="inputRegistrationLogin" aria-describedby="emailHelp" placeholder="Wpisz swój login">
+                    <input type="text" class="form-control" id="inputRegistrationLogin" aria-describedby="emailHelp" v-model="newUserName" placeholder="Wpisz swój login">
                 </div>
                 <div class="form-group">
                     <label class="login-label" for="inputRegistrationPassword">Hasło</label>
-                    <input type="password" class="form-control" id="inputRegistrationPassword" placeholder="Wpisz swoje hasło">
+                    <input type="password" class="form-control" id="inputRegistrationPassword" v-model="password" placeholder="Wpisz swoje hasło">
                 </div>
                 <div class="form-group">
                     <label class="login-label" for="inputRegistrationRepeatedPassword">Powtórz hasło</label>
-                    <input type="password" class="form-control" id="inputRegistrationRepeatedPassword" placeholder="Powtórz swoje hasło">
+                    <input type="password" class="form-control" id="inputRegistrationRepeatedPassword" v-model="repeatedPassword" placeholder="Powtórz swoje hasło">
                 </div>
-                <button type="submit" class="btn btn-info login-button">Zarejestruj</button>
+                <button type="button" class="btn btn-info login-button" v-on:click="registerUser">Zarejestruj</button>
             </form>
         </div>
     </div>
@@ -47,6 +47,9 @@
         data: () => ({
             userName: "",
             pass: "",
+            newUserName: "",
+            password: "",
+            repeatedPassword: ""
         }),
 
         methods: {
@@ -67,6 +70,25 @@
             },
 
             registerUser() {
+
+                if (this.password.length >= 3) {
+
+                    if (this.password === this.repeatedPassword) {
+                        ApiClient.registerUser(this.newUserName, this.password, function(){
+                            /* eslint-disable no-console */
+                            console.log("On register success");
+                            alert("Rejestracja przebiegła pomyślnie");
+                        }, function(response){
+                            /* eslint-disable no-console */
+                            console.log("Rejestracja nieudana" + response);
+                        })
+                    } else {
+                        alert("Hasła różnią się.")
+                    }
+
+                } else {
+                    alert("Hasło musi mieć minimum 3 znaki.")
+                }
 
             },
 
