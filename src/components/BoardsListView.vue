@@ -12,6 +12,7 @@
 <script>
 import { UserStore } from '../DataHolders/User'
 import { ApiClient } from '../Api/ApiClient'
+import { Events } from '../States/EventObserver.js'
 
 export default {
     name: 'BoardsListView',
@@ -23,14 +24,29 @@ export default {
     methods: {
         showExactBoard: function(id, url) {          
             this.$router.push('/b/' + UserStore.getCurrentUser() + '/' + url)
-        }
+        },
+
+        downloadBoards() {
+            var self = this
+            ApiClient.getBoardsForUser(function(response) {
+                self.boards = response
+                var ownedIds = []
+                response.forEach(element => {
+                    ownedIds.push(element.id);
+                })
+
+                UserStore.setOwnerBoardsID(ownedIds)
+            })
+        },
     },
 
     mounted () {
-        var self = this
-        ApiClient.getBoardsForUser(function(response) {
-            self.boards = response
-        })
+        this.downloadBoards()
+        Events.assignBoardRefresh(this.downloadBoards)
+    },
+
+    beforeDestroy() {
+        Events.clearBoardRefresh()
     }
 }
 </script>

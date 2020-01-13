@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <NavBar @new-board="showNewBoardView"/>
-    <NewBoardView v-if="isModalVisible" @close-board="hideNewBoardView"/>
     <router-view/>
+    <NewBoardView v-if="isModalVisible" @close-board="hideNewBoardView"/>
   </div>
 </template>
 

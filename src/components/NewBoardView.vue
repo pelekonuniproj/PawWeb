@@ -19,6 +19,9 @@
 </template>
 
 <script>
+import { ApiClient } from '../Api/ApiClient.js'
+import { Events } from '../States/EventObserver.js'
+
 export default {
     name: 'NewBoardView',
 
@@ -30,7 +33,18 @@ export default {
 
     methods: {
         createTable: function() {
+            var self = this
+            ApiClient.createBoard(this.typedName, function(response) {
+                    /* eslint-disable no-console */
+                    console.log("On board create success ");
+                    console.log(response);
+                    /* eslint-enable no-console */
 
+                    if (response.status == 201) {
+                        Events.callBoardRefresh();
+                        self.$emit("close-board")
+                    }
+            })
         },
 
         onNameInputChange: function() {

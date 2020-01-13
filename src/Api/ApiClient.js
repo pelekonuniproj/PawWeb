@@ -69,6 +69,45 @@ class Api {
             'numberOnList' : numberOnList
         }).then(response => onSuccess(response.data)).catch(onFail())
     }
+
+    createBoard(boardName, onSuccess) {
+        const endpoint = this.apiHost + "/board";
+        const authValue = "Bearer " + UserStore.getToken()
+
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        }
+
+        Vue.axios.post(endpoint, {
+            name: boardName,
+            team_id: null,
+            background: "",
+            isPublic: true
+        }, headers).then(response => onSuccess(response))
+    }
+
+    updateBoardName(newName, boardId) {
+        const endpoint = this.apiHost + "/board/" + boardId;
+        const authValue = "Bearer " + UserStore.getToken()
+
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        }
+
+        Vue.axios.put(endpoint, {
+            name: newName,
+            background: "",
+            isPublic: true
+        }, headers)
+    }
 }
 
 let ApiClient = new Api();

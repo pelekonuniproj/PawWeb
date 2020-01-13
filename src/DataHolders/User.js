@@ -5,6 +5,7 @@ class User {
         this.userToken = ""
         this.hasAdminRights = true
         this.isLogged = false
+        this.ownedBoardsIds = []
     }
 
     getCurrentUser() {
@@ -30,6 +31,27 @@ class User {
 
     setUserName(name) {
         this.userName = name
+    }
+
+    logoutUser() {
+        this.userName = ""
+        this.userToken = ""
+        this.isLogged = false
+    }
+
+    setOwnerBoardsID(array) {
+        this.ownedBoardsIds = array
+    }
+
+    isOwningBoard(boardId) {
+        var found = false
+        this.ownedBoardsIds.forEach(element => {
+            if (element == boardId) {
+                found = true
+            }
+        });
+
+        return found
     }
 }
 

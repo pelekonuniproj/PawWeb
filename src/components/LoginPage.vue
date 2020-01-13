@@ -38,6 +38,7 @@
 <script>
     import { ApiClient } from '../Api/ApiClient'
     import { UserStore } from '../DataHolders/User'
+    import { Events } from '../States/EventObserver.js'
 
     export default {
         name: 'LoginPage',
@@ -93,6 +94,7 @@
             },
 
             forwardToMainPage() {
+                Events.callNavBarRefresh()
                 this.$router.push("/")
             }
         },
