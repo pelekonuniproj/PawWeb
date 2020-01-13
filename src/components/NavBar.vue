@@ -12,7 +12,7 @@
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item">
 				<label class="user-label">{{ user }}</label>
-				<button type="button" class="btn btn-info my-button btn-add">Wyloguj</button>
+				<button type="button" class="btn btn-info my-button btn-add" v-on:click="logoutClicked">Wyloguj</button>
 			</li>
 		</ul>
 		</nav>
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { UserStore } from '../DataHolders/User.js'
+
 export default {
   name: 'NavBar',
 
@@ -27,7 +29,7 @@ export default {
     home: 'Home',
     storyboards: 'Tablice',
     title: 'Trello',
-	user: "Użytkownik",
+	user: "Użytkownik " + UserStore.getCurrentUser(),
   }),
 
   methods: {
@@ -45,7 +47,13 @@ export default {
 
     showCreateNewBoard: function() {
       this.$emit("new-board")
-    }
+	},
+	
+	logoutClicked: function() {
+		UserStore.logoutUser()
+		this.user = "Użytkownik"
+		this.$router.push("/login")
+	}
   }
 }
 </script>

@@ -31,6 +31,12 @@ class User {
     setUserName(name) {
         this.userName = name
     }
+
+    logoutUser() {
+        this.userName = ""
+        this.userToken = ""
+        this.isLogged = false
+    }
 }
 
 let UserStore = new User();
