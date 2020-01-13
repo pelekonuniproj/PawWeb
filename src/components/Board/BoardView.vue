@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<BoardTitleBar v-bind:boardName="boardName"/>
+		<BoardTitleBar v-bind:boardName="boardName" v-bind:canEdit="canEditTitle" @onTitleChange="changedTitleName"/>
 	<div class="board-main d-flex flex-row">
 		<draggable v-model="sections" @end="didDrag" class="board-main d-flex flex-row">
 			<BoardSection v-for="section in sections" v-bind:key="section.id" v-bind:sectionName="section.name" v-bind:id="section.id"/>
@@ -16,6 +16,7 @@ import BoardTitleBar from '../BoardTitleBar.vue'
 import AddList from "./Lists/AddList"
 import { ApiClient } from '../../Api/ApiClient'
 import draggable from 'vuedraggable'
+import { UserStore } from '../../DataHolders/User'
 
 export default {
     name: 'BoardView',
@@ -30,6 +31,7 @@ export default {
 		sections: [],
 		boardId: null,
 		boardName: "",
+		canEditTitle: false,
     }),
 	// https://github.com/SortableJS/Vue.Draggable
     methods: {
@@ -39,6 +41,10 @@ export default {
 			console.log(this.sections);
              /* eslint-enable no-console */
 		},
+
+		changedTitleName(newName) {
+			ApiClient.updateBoardName(newName, this.boardId)
+		}
 	},
 	
 	mounted() {
@@ -48,6 +54,7 @@ export default {
 				self.sections = response.lists
 				self.boardId = response.id
 				self.boardName = response.name
+				self.canEditTitle = UserStore.isOwningBoard(response.id)
 			}
 		})
 	}

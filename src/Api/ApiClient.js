@@ -89,6 +89,25 @@ class Api {
             isPublic: true
         }, headers).then(response => onSuccess(response))
     }
+
+    updateBoardName(newName, boardId) {
+        const endpoint = this.apiHost + "/board/" + boardId;
+        const authValue = "Bearer " + UserStore.getToken()
+
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        }
+
+        Vue.axios.put(endpoint, {
+            name: newName,
+            background: "",
+            isPublic: true
+        }, headers)
+    }
 }
 
 let ApiClient = new Api();

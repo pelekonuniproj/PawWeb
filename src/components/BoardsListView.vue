@@ -30,6 +30,12 @@ export default {
             var self = this
             ApiClient.getBoardsForUser(function(response) {
                 self.boards = response
+                var ownedIds = []
+                response.forEach(element => {
+                    ownedIds.push(element.id);
+                })
+
+                UserStore.setOwnerBoardsID(ownedIds)
             })
         },
     },
