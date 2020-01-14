@@ -108,6 +108,21 @@ class Api {
             isPublic: true
         }, headers)
     }
+
+    updateBoardListOrder(boardId, body) {
+        const endpoint = this.apiHost + "/list/order/" + boardId;
+        const authValue = "Bearer " + UserStore.getToken()
+
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        }
+
+        Vue.axios.put(endpoint, body, headers)
+    }
 }
 
 let ApiClient = new Api();
