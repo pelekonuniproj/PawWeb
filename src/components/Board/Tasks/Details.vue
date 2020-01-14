@@ -56,8 +56,10 @@
                 var self = this;
                 ApiClient.getCommentsForTask(function(response) {
                     self.detailsList = response;
-                    // eslint-disable-next-line no-console
-                    console.log(response);
+                    for(var i = 0; i < self.detailsList.length; i++) {
+                        var date = new Date(self.detailsList[i].addDate);
+                        self.detailsList[i].addDate =date.getDay() + "." + date.getMonth() + "." + date.getFullYear();
+                    }
                 }, self.taskId)
             }
         },
