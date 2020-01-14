@@ -2,7 +2,7 @@
     <div>
         <div class="add-card" id="showFormAddCard">
             <form>
-                <input type="text" v-model.trim="title" class="add-card-form" placeholder="Wprowadź tytuł karty">
+                <input type="text" v-model.trim="title" class="add-card-form" id="add-card-form-text" placeholder="Wprowadź tytuł karty">
             </form>
             <button type="button" v-on:click="createCard" class="btn btn-light add-card-form-button">Dodaj Kartę</button>
             <button type="button" v-on:click="showForm" class="btn btn-light add-card-form-button">Anuluj</button>
@@ -36,15 +36,16 @@
                 }
             },
             createCard(){
-                ApiClient.createCard(this.$parent.id, this.title, "", 10,4,function(){
+                ApiClient.createCard(Number(this.$parent.id), this.title, "", 1,1,function(){
                     /* eslint-disable no-console */
-                    console.log("On login success");
+                    console.log("Card added");
                     /* eslint-enable no-console */
                 }, function(response){
                     /* eslint-disable no-console */
-                    console.log("On login fail" + response);
+                    console.log("Adding card failed" + response);
                     /* eslint-enable no-console */
                 })
+                this.showForm()
             }
         }
     }
