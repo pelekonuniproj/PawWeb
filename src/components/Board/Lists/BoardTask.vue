@@ -3,7 +3,8 @@
         <div v-on:click="showTask(id)">
             <p class="board-task-title">{{ name }}</p>
         </div>
-            <Details v-if="areDetailsVisible" @close-details="closeTask"></Details>
+        <Details v-if="areDetailsVisible" @close-details="closeTask" v-bind:taskId="id" v-bind:taskDescription="desc"
+                 v-bind:taskName="name"></Details>
     </div>
 </template>
 

@@ -2,7 +2,7 @@
         <div class="modal-dialog details-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Aktywność</h5>
+                    <h5 class="modal-title">{{ taskName }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="closeDetails">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -34,7 +34,7 @@
 
     export default {
         name: "Details",
-        props: ['areDetailsVisible'],
+        props: ['taskId', 'taskDescription', 'taskName'],
         components: {
             Detail
         },
