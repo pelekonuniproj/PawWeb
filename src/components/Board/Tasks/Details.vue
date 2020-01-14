@@ -1,10 +1,9 @@
 <template>
-    <div class="row">
         <div class="modal-dialog details-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Aktywność</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="closeDetails">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -27,7 +26,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -36,16 +34,27 @@
 
     export default {
         name: "Details",
+        props: ['areDetailsVisible'],
         components: {
             Detail
         },
 
         data: () => ({
+            areVisible: false,
             detailsList: [
                 {id: 1, date: "14.12.2019", comment: "zmienił nazwę", user: "Inny użytkownik"},
                 {id: 2, date: "13.12.2019", comment: "utworzył zadanie", user: "Użytkownik"},
             ],
         }),
+
+        methods:{
+            closeDetails() {
+                /* eslint-disable no-console */
+                console.log("closed");
+                this.$emit("close-details")
+            }
+        }
+
 
     }
 
@@ -54,8 +63,13 @@
 <style scoped>
 
     .details-dialog {
+        display: block;
         width: 460px;
         padding: 20px;
+        position: fixed;
+        left: 0;
+        top: 200px;
+        right: 0;
     }
     .details-group {
         margin-left: 20px;

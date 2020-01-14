@@ -1,21 +1,36 @@
 <template>
-    <div class="board-task" v-on:click="showTask(id)">
-        <p class="board-task-title">{{ name }}</p>
+    <div class="board-task">
+        <div v-on:click="showTask(id)">
+            <p class="board-task-title">{{ name }}</p>
+        </div>
+            <Details v-if="areDetailsVisible" @close-details="closeTask"></Details>
     </div>
 </template>
 
 <script>
-export default {
-    name: "BoardTask",
+    import Details from "../Tasks/Details";
 
-    props: ['name', 'id', 'desc'],
+    export default {
+        name: "BoardTask",
+        components: {Details},
+        props: ['name', 'id', 'desc'],
 
-    methods: {
-        showTask(id) {
-            /* eslint-disable no-console */
-            console.log(id);
-            /* eslint-enable no-console */
+        data: () => ({
+            areDetailsVisible: false,
+        }),
+
+        methods: {
+            showTask(id) {
+                /* eslint-disable no-console */
+                console.log(id);
+                /* eslint-enable no-console */
+                this.areDetailsVisible = true;
+            },
+            closeTask(id) {
+                /* eslint-disable no-console */
+                console.log(id);
+                this.areDetailsVisible = false;
+            }
         }
     }
-}
 </script>
