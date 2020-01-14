@@ -8,8 +8,10 @@
             @showMoveAllCards="handleMoveAllCards" @showSort="handleSortAllCards" @showMoveList="handleShowMoveList"/>
         </div>
         <component v-bind:is="componentName" @show="close"/>
-        <BoardTask class="d-flex flex-column board-section-task-holder" v-for="task in tasks" v-bind:key="task.id"
+        <draggable v-model="tasks" @end="didDrag">
+            <BoardTask class="d-flex flex-column board-section-task-holder" v-for="task in tasks" v-bind:key="task.id"
                     v-bind:name="task.title" v-bind:id="task.id" v-bind:desc="task.description" />
+        </draggable>
         <AddCard/>
     </div>
 </template>
@@ -25,6 +27,7 @@ import MoveAllCardsMenuItem from "./Menu/MoveAllCardsMenuItem";
 import MoveListMenuItem from "./Menu/MoveListMenuItem";
 import SortAllCardsMenuItem from "./Menu/SortAllCardsMenuItem";
 import AddCard from "./AddCard";
+import draggable from 'vuedraggable'
 
     export default {
         name: "BoardSection",
@@ -38,6 +41,7 @@ import AddCard from "./AddCard";
             ArchiveAllCardsMenuItem,
             AddCardMenuItem,
             BoardTask,
+            draggable,
         },
         
         props: ['sectionName', 'tasksList', 'id'],
@@ -53,10 +57,31 @@ import AddCard from "./AddCard";
             var self = this
             ApiClient.getTasksForBoardSection(this.id, function(response) {
                 self.tasks = response
+                self.tasks.sort( (a, b) => (a.numberOnList < b.numberOnList) ? -1 : ((a.numberOnList > b.numberOnList) ? 1 : 0))
             })
         },
         
         methods: {
+            didDrag() {
+                var index = 1
+                this.tasks.forEach(element => {
+                    element.numberOnList = index
+                    index += 1
+                })
+
+                this.createRequestBodyAndSend()
+            },
+
+            createRequestBodyAndSend() {
+                // var bodyArray = []
+
+                // this.tasks.forEach(element => {
+                //     bodyArray.push({
+
+                //     })
+                // })
+            },
+
             handleShowAddCard() {
                 if(this.componentName===AddCardMenuItem){
                     this.componentName = null

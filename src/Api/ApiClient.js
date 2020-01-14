@@ -123,6 +123,10 @@ class Api {
 
         Vue.axios.put(endpoint, body, headers)
     }
+
+    updateBoardListTasksOrder() {
+        
+    }
 }
 
 let ApiClient = new Api();
