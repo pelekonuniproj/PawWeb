@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import Details from "../Tasks/Details";
+    import Details from "../Cards/CardDetails";
 
     export default {
         name: "BoardTask",

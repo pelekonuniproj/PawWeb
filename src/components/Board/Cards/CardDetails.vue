@@ -31,10 +31,10 @@
 <script>
 
     import { ApiClient } from '../../../Api/ApiClient'
-    import Detail from './Detail.vue'
+    import Detail from './CardDetail.vue'
 
     export default {
-        name: "Details",
+        name: "CardDetails",
         props: ['taskId', 'taskDescription', 'taskName'],
         components: {
             Detail
