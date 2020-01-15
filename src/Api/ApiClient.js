@@ -25,7 +25,23 @@ class Api {
 
     getCommentsForCard(callBack, cardId) {
         const endpoint = this.apiHost + "/comment/card/" + cardId;
-        const authValue = "Bearer " + UserStore.getToken()
+        const authValue = "Bearer " + UserStore.getToken();
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        };
+
+        Vue.axios.get(endpoint, headers).then(response => {
+            callBack(response.data)
+        })
+    }
+
+    getTasksForCard(callBack, cardId) {
+        const endpoint = this.apiHost + "/task/list/" + cardId;
+        const authValue = "Bearer " + UserStore.getToken();
         const headers = {
             headers: {
                 'Authorization': authValue,
@@ -132,6 +148,67 @@ class Api {
             background: "",
             isPublic: true
         }, headers)
+    }
+
+    deleteTask(taskId, onSuccess, onFail) {
+        const endpoint = this.apiHost + "/task/" + taskId;
+        const authValue = "Bearer " + UserStore.getToken();
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        };
+
+        Vue.axios.delete(endpoint, headers).then(response => onSuccess(response.data)).catch(onFail())
+    }
+
+    addTask(taskListId, name, onSuccess, onFail) {
+        const endpoint = this.apiHost + "/task";
+        const authValue = "Bearer " + UserStore.getToken();
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        };
+
+        Vue.axios.post(endpoint, {
+            "taskListId": taskListId,
+            "name": name,
+        }, headers).then(response => onSuccess(response.data)).catch(onFail())
+    }
+    deleteTaskList(taskListId, onSuccess, onFail) {
+        const endpoint = this.apiHost + "/task/list/" + taskListId;
+        const authValue = "Bearer " + UserStore.getToken();
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        };
+
+        Vue.axios.delete(endpoint, headers).then(response => onSuccess(response.data)).catch(onFail())
+    }
+
+    addNewTaskList(cardId, name, onSuccess, onFail) {
+        const endpoint = this.apiHost + "/task/list";
+        const authValue = "Bearer " + UserStore.getToken();
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        };
+
+        Vue.axios.post(endpoint, {
+            "cardId": cardId,
+            "name": name,
+        }, headers).then(response => onSuccess(response.data)).catch(onFail())
     }
 }
 

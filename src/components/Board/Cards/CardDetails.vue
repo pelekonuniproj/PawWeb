@@ -8,8 +8,25 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-9">
+                                <input v-model="newListName" type="text" class="form-control"
+                                       placeholder="Dodaj nową listę zadań...">
+                            </div>
+                            <div class="col-3">
+                                <button type="button" v-on:click="addNewTaskList" class="btn btn-info my-button">Dodaj</button>
+                            </div>
+                        </div>
+                    </div>
+
                         <div class="form-group">
+                            <TasksList class="form-group" v-for="taskList in taskLists" v-bind:key="taskList.id" v-bind:id="taskList.id"
+                                    v-bind:name="taskList.name" v-bind:taskJsons="taskList.taskJsons"></TasksList>
+                        </div>
+                        <div class="form-group">
+                            <h6>Aktywność</h6>
                             <div class="row">
                                 <div class="col-9">
                                     <input type="text" class="form-control" id="comment-label"
@@ -22,7 +39,6 @@
                         </div>
                         <Detail class="form-group details-group" v-for="detail in detailsList" v-bind:key="detail.id"
                                 v-bind:content="detail.content" v-bind:date="detail.addDate" v-bind:user="detail.userName" />
-                    </form>
                 </div>
             </div>
         </div>
@@ -32,17 +48,21 @@
 
     import { ApiClient } from '../../../Api/ApiClient'
     import Detail from './CardDetail.vue'
+    import TasksList from "./TasksList";
 
     export default {
         name: "CardDetails",
         props: ['cardId', 'cardDescription', 'cardName'],
         components: {
+            TasksList,
             Detail
         },
 
         data: () => ({
             areVisible: false,
             detailsList: [],
+            taskLists: [],
+            newListName: ""
         }),
 
         methods:{
@@ -61,11 +81,27 @@
                         self.detailsList[i].addDate =date.getDay() + "." + date.getMonth() + "." + date.getFullYear();
                     }
                 }, self.cardId)
+            },
+            downloadTasks() {
+                var self = this;
+                ApiClient.getTasksForCard(function(response) {
+                    self.taskLists = response;
+                }, self.cardId)
+            },
+            addNewTaskList() {
+                ApiClient.addNewTaskList(this.cardId, this.newListName, function () {
+                    /* eslint-disable no-console */
+                    console.log("Success - task added");
+                }, function (response) {
+                    /* eslint-disable no-console */
+                    console.log("Fail - task not added: " + response);
+                })
             }
         },
 
         mounted () {
             this.downloadComments();
+            this.downloadTasks();
         },
 
     }
