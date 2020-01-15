@@ -8,7 +8,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
                         <div class="form-group">
                             <TasksList class="form-group" v-for="taskList in taskLists" v-bind:key="taskList.id" v-bind:id="taskList.id"
                                     v-bind:name="taskList.name" v-bind:taskJsons="taskList.taskJsons"></TasksList>
@@ -27,7 +26,6 @@
                         </div>
                         <Detail class="form-group details-group" v-for="detail in detailsList" v-bind:key="detail.id"
                                 v-bind:content="detail.content" v-bind:date="detail.addDate" v-bind:user="detail.userName" />
-                    </form>
                 </div>
             </div>
         </div>
