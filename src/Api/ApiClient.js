@@ -149,6 +149,20 @@ class Api {
             isPublic: true
         }, headers)
     }
+
+    deleteTask(taskId, onSuccess, onFail) {
+        const endpoint = this.apiHost + "/task/" + taskId;
+        const authValue = "Bearer " + UserStore.getToken();
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        };
+
+        Vue.axios.delete(endpoint, headers).then(response => onSuccess(response.data)).catch(onFail())
+    }
 }
 
 let ApiClient = new Api();
