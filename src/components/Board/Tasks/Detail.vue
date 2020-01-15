@@ -2,7 +2,7 @@
     <div class="form-group details-group">
         <div class="row">
             <span>
-                <span id="user" class="user-span">{{ user }}</span> <span id="comment" class="comment-span"> {{ comment }}</span>
+                <span id="user" class="user-span">{{ user }}</span> <span id="comment" class="comment-span"> {{ content }}</span>
             </span>
         </div>
         <div class="row">
@@ -16,7 +16,7 @@
 
     export default {
         name: "Detail",
-        props: ["date", "comment", "user"],
+        props: ["date", "content", "user"],
     }
 
 

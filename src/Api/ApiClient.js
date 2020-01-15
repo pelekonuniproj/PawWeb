@@ -23,6 +23,22 @@ class Api {
         })
     }
 
+    getCommentsForTask(callBack, taskId) {
+        const endpoint = this.apiHost + "/comment/card/" + taskId;
+        const authValue = "Bearer " + UserStore.getToken()
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        };
+
+        Vue.axios.get(endpoint, headers).then(response => {
+            callBack(response.data)
+        })
+    }
+
     // getBoardsForTeam(teamId, callback) {
     //     var endpoint = this.apiHost + "/board/all/" + teamId;
     //     Vue.axios.get(endpoint).then(response => callback(response.data))
