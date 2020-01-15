@@ -59,6 +59,7 @@
                 ApiClient.loginUser(this.userName, this.pass, function(response){
                     UserStore.setToken(response.access_token)
                     UserStore.setUserName(self.userName)
+                    UserStore.setUserId(response.userId)
                     /* eslint-disable no-console */
                     console.log("On login success");
                     /* eslint-enable no-console */
@@ -76,12 +77,11 @@
 
                     if (this.password === this.repeatedPassword) {
                         ApiClient.registerUser(this.newUserName, this.password, function(){
-                            /* eslint-disable no-console */
-                            console.log("On register success");
                             alert("Rejestracja przebiegła pomyślnie");
                         }, function(response){
                             /* eslint-disable no-console */
                             console.log("Rejestracja nieudana" + response);
+                            /* eslint-enable no-console */
                         })
                     } else {
                         alert("Hasła różnią się.")

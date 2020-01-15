@@ -180,6 +180,7 @@ class Api {
             "name": name,
         }, headers).then(response => onSuccess(response.data)).catch(onFail())
     }
+
     deleteTaskList(taskListId, onSuccess, onFail) {
         const endpoint = this.apiHost + "/task/list/" + taskListId;
         const authValue = "Bearer " + UserStore.getToken();
@@ -211,8 +212,8 @@ class Api {
         }, headers).then(response => onSuccess(response.data)).catch(onFail())
     }
 
-    addCommentForCard(cardId, comment, onSuccess, onFail) {
-        var endpoint = this.apiHost + "/comment/" + cardId;
+    addCommentForCard(destCardId, comment, onSuccess, onFail) {
+        var endpoint = this.apiHost + "/comment/" + destCardId;
         const authValue = "Bearer " + UserStore.getToken();
 
         const headers = {
@@ -224,8 +225,9 @@ class Api {
         };
 
         Vue.axios.post(endpoint, {
-            'card': cardId,
-            'content' : comment,
+            userId: UserStore.getUserId(),
+            cardId: destCardId,
+            content : comment,
         }, headers).then(response => onSuccess(response.data)).catch(onFail())
     }
 
@@ -257,6 +259,39 @@ class Api {
         }
 
         Vue.axios.put(endpoint, body, headers)
+    }
+
+    getAttachmentsForCard(cardId, onSuccess) {
+        const endpoint = this.apiHost + "/attachment/card/" + cardId;
+        const authValue = "Bearer " + UserStore.getToken()
+
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        }
+
+        Vue.axios.get(endpoint, headers).then(response => onSuccess(response))
+    }
+
+    addAttachmentForCard(cardId, attachName, dataAsBase64, onSuccess) {
+        const endpoint = this.apiHost + "/attachment/card/" + cardId;
+        const authValue = "Bearer " + UserStore.getToken()
+
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        }
+
+        Vue.axios.put(endpoint, {
+            attachment: dataAsBase64,
+            name: attachName
+        }, headers).then(response => onSuccess(response))
     }
 }
 

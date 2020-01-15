@@ -15,7 +15,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-9">
-                    <input v-model="newTaskName" type="text" class="form-control add-task" id="comment-label"
+                    <input v-model="newTaskName" type="text" class="form-control add-task" id="task-comment-label"
                            placeholder="Dodaj zadanie...">
                 </div>
                 <div class="col-3">
@@ -46,21 +46,25 @@
 
         methods: {
             addTask() {
+                var self = this
                 ApiClient.addTask(this.id, this.newTaskName, function () {
-                    /* eslint-disable no-console */
-                    console.log("Success - task added");
+                    self.newTaskName = ""
+                    self.$emit("refresh-window")
                 }, function (response) {
                     /* eslint-disable no-console */
                     console.log("Fail - task not added: " + response);
+                    /* eslint-enable no-console */
                 })
             },
+
             onDeleteClicked() {
+                var self = this
                 ApiClient.deleteTaskList(this.id,function () {
-                    /* eslint-disable no-console */
-                    console.log("Success - list deleted");
+                    self.$emit("refresh-window")
                 }, function (response) {
                     /* eslint-disable no-console */
                     console.log("Fail - list not deleted:  " + response);
+                    /* eslint-enable no-console */
                 })
             }
         }

@@ -81,9 +81,7 @@ import draggable from 'vuedraggable'
                         numberOnList: element.numberOnList
                     })
                 })
-                /* eslint-disable no-console */
-                console.log("Send card update");
-                /* eslint-enable no-console */
+                
                 ApiClient.updateBoardCardOrder(this.id, bodyArray)
             },
 
