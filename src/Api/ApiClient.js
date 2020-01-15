@@ -74,16 +74,25 @@ class Api {
         }).then(response => onSuccess(response.data)).catch(onFail())
     }
 
-    createCard(listId, title, description, labelId, numberOnList, onSuccess, onFail) {
-        var endpoint = this.apiHost + "/card"
+    createCard(cardListId, cardTitle, cardDescription, cardLabelId, cardNumberOnList, onSuccess) {
+        const endpoint = this.apiHost + "/card"
+        const authValue = "Bearer " + UserStore.getToken()
+
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        }
 
         Vue.axios.post(endpoint, {
-            'listId': listId,
-            'title': title,
-            'description' : description,
-            'labelId' : labelId,
-            'numberOnList' : numberOnList
-        }).then(response => onSuccess(response.data)).catch(onFail())
+            listId: cardListId,
+            title: cardTitle,
+            description : cardDescription,
+            labelId : cardLabelId,
+            numberOnList : cardNumberOnList
+        }, headers).then(response => onSuccess(response))
     }
 
     createBoard(boardName, onSuccess) {
