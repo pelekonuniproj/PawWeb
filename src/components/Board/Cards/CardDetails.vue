@@ -8,6 +8,19 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-9">
+                                <input v-model="newListName" type="text" class="form-control"
+                                       placeholder="Dodaj nową listę zadań...">
+                            </div>
+                            <div class="col-3">
+                                <button type="button" v-on:click="addNewTaskList" class="btn btn-info my-button">Dodaj</button>
+                            </div>
+                        </div>
+                    </div>
+
                         <div class="form-group">
                             <TasksList class="form-group" v-for="taskList in taskLists" v-bind:key="taskList.id" v-bind:id="taskList.id"
                                     v-bind:name="taskList.name" v-bind:taskJsons="taskList.taskJsons"></TasksList>
@@ -49,6 +62,7 @@
             areVisible: false,
             detailsList: [],
             taskLists: [],
+            newListName: ""
         }),
 
         methods:{
@@ -73,6 +87,15 @@
                 ApiClient.getTasksForCard(function(response) {
                     self.taskLists = response;
                 }, self.cardId)
+            },
+            addNewTaskList() {
+                ApiClient.addNewTaskList(this.cardId, this.newListName, function () {
+                    /* eslint-disable no-console */
+                    console.log("Success - task added");
+                }, function (response) {
+                    /* eslint-disable no-console */
+                    console.log("Fail - task not added: " + response);
+                })
             }
         },
 

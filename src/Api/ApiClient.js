@@ -180,6 +180,23 @@ class Api {
             "name": name,
         }, headers).then(response => onSuccess(response.data)).catch(onFail())
     }
+
+    addNewTaskList(cardId, name, onSuccess, onFail) {
+        const endpoint = this.apiHost + "/task/list";
+        const authValue = "Bearer " + UserStore.getToken();
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        };
+
+        Vue.axios.post(endpoint, {
+            "cardId": cardId,
+            "name": name,
+        }, headers).then(response => onSuccess(response.data)).catch(onFail())
+    }
 }
 
 let ApiClient = new Api();

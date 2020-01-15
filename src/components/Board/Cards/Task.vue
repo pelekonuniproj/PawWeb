@@ -31,7 +31,6 @@
                 //TODO
             },
             onDeleteClicked() {
-                //TODO test
                 ApiClient.deleteTask(this.id, function () {
                     /* eslint-disable no-console */
                     console.log("Success - task deleted");

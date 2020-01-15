@@ -37,7 +37,6 @@
 
         methods: {
             addTask() {
-                //TODO test
                 ApiClient.addTask(this.id, this.newTaskName, function () {
                     /* eslint-disable no-console */
                     console.log("Success - task added");
