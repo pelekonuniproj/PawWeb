@@ -2,7 +2,7 @@
         <div class="modal-dialog details-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ taskName }}</h5>
+                    <h5 class="modal-title">{{ cardName }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="closeDetails">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -35,7 +35,7 @@
 
     export default {
         name: "CardDetails",
-        props: ['taskId', 'taskDescription', 'taskName'],
+        props: ['cardId', 'cardDescription', 'cardName'],
         components: {
             Detail
         },
@@ -60,7 +60,7 @@
                         var date = new Date(self.detailsList[i].addDate);
                         self.detailsList[i].addDate =date.getDay() + "." + date.getMonth() + "." + date.getFullYear();
                     }
-                }, self.taskId)
+                }, self.cardId)
             }
         },
 
