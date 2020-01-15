@@ -25,7 +25,23 @@ class Api {
 
     getCommentsForCard(callBack, cardId) {
         const endpoint = this.apiHost + "/comment/card/" + cardId;
-        const authValue = "Bearer " + UserStore.getToken()
+        const authValue = "Bearer " + UserStore.getToken();
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        };
+
+        Vue.axios.get(endpoint, headers).then(response => {
+            callBack(response.data)
+        })
+    }
+
+    getTasksForCard(callBack, cardId) {
+        const endpoint = this.apiHost + "/task/list/" + cardId;
+        const authValue = "Bearer " + UserStore.getToken();
         const headers = {
             headers: {
                 'Authorization': authValue,

@@ -10,9 +10,8 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <h6 class="modal-title">Lista zadań</h6>
-                            <Task class="form-group details-group" v-for="task in taskList" v-bind:key="task.id"
-                                    v-bind:isDone="task.isDone" v-bind:description="task.description"></Task>
+                            <TasksList class="form-group" v-for="taskList in taskLists" v-bind:key="taskList.id"
+                                    v-bind:name="taskList.name" v-bind:taskJsons="taskList.taskJsons"></TasksList>
                         </div>
                         <div class="form-group">
                             <div class="row">
@@ -37,23 +36,20 @@
 
     import { ApiClient } from '../../../Api/ApiClient'
     import Detail from './CardDetail.vue'
-    import Task from "./Task";
+    import TasksList from "./TasksList";
 
     export default {
         name: "CardDetails",
         props: ['cardId', 'cardDescription', 'cardName'],
         components: {
-            Task,
+            TasksList,
             Detail
         },
 
         data: () => ({
             areVisible: false,
             detailsList: [],
-            taskList: [
-                {id: 1, isDone: true, description: "Zrobić zadanie"},
-                {id: 2, isDone: false, description: "Zrobić kolejne zadanie"},
-            ],
+            taskLists: [],
         }),
 
         methods:{
@@ -72,11 +68,18 @@
                         self.detailsList[i].addDate =date.getDay() + "." + date.getMonth() + "." + date.getFullYear();
                     }
                 }, self.cardId)
+            },
+            downloadTasks() {
+                var self = this;
+                ApiClient.getTasksForCard(function(response) {
+                    self.taskLists = response;
+                }, self.cardId)
             }
         },
 
         mounted () {
             this.downloadComments();
+            this.downloadTasks();
         },
 
     }

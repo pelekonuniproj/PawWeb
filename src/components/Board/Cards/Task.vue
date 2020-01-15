@@ -1,9 +1,9 @@
 <template>
     <div class="form-group details-group">
-        <div class="row">
+        <div class="row" style="margin-left: 10px" >
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="taskDone">
-                <label class="form-check-label" for="taskDone">{{ description }}</label>
+                <label class="form-check-label" for="taskDone">{{ name }}</label>
             </div>
         </div>
     </div>
@@ -12,7 +12,7 @@
 <script>
     export default {
         name: "Task",
-        props: ["isDone", "description"],
+        props: ["done", "name"],
     }
 
 
