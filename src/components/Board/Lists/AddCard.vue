@@ -20,6 +20,8 @@
 
     export default {
         name: "AddCard",
+        props: ["listId"],
+
         data: function() {
         return {
             title: ""
@@ -36,14 +38,12 @@
                 }
             },
             createCard(){
-                ApiClient.createCard(Number(this.$parent.id), this.title, "", 1,1,function(){
+                var self = this
+                ApiClient.createCard(this.listId, this.title, "", 1, 1, function(response) {
                     /* eslint-disable no-console */
-                    console.log("Card added");
+                    console.log("Card added: " + response);
                     /* eslint-enable no-console */
-                }, function(response){
-                    /* eslint-disable no-console */
-                    console.log("Adding card failed" + response);
-                    /* eslint-enable no-console */
+                    self.$emit("refresh-cards")
                 })
                 this.showForm()
             }

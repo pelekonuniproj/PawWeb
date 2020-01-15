@@ -12,7 +12,7 @@
             <BoardCard class="d-flex flex-column board-section-card-holder" v-for="card in cards" v-bind:key="card.id"
                     v-bind:name="card.title" v-bind:id="card.id" v-bind:desc="card.description" />
         </draggable>
-        <AddCard/>
+        <AddCard v-bind:listId="id" @refresh-cards="downloadCards" />
     </div>
 </template>
 
@@ -54,14 +54,18 @@ import draggable from 'vuedraggable'
         },
         
         mounted() {
-            var self = this
-            ApiClient.getCardsForBoardSection(this.id, function(response) {
-                self.cards = response
-                self.cards.sort( (a, b) => (a.numberOnList < b.numberOnList) ? -1 : ((a.numberOnList > b.numberOnList) ? 1 : 0))
-            })
+            this.downloadCards()
         },
         
         methods: {
+            downloadCards() {
+                var self = this
+                ApiClient.getCardsForBoardSection(this.id, function(response) {
+                    self.cards = response
+                    self.cards.sort( (a, b) => (a.numberOnList < b.numberOnList) ? -1 : ((a.numberOnList > b.numberOnList) ? 1 : 0))
+                })
+            },
+
             didDrag() {
                 var index = 1
                 this.cards.forEach(element => {

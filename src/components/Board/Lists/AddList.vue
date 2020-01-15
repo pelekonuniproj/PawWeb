@@ -2,9 +2,9 @@
     <div>
         <div class="add-list" id="showFormAddList">
             <form>
-                <input type="text" class="add-list-form" placeholder="Wprowadź tytuł listy">
+                <input type="text" class="add-list-form" placeholder="Wprowadź tytuł listy" v-model="newListName">
             </form>
-            <button type="button" class="btn btn-light add-list-button-form">Dodaj Listę</button>
+            <button type="button" class="btn btn-light add-list-button-form" v-on:click="handleAddList">Dodaj Listę</button>
             <button type="button" v-on:click="showForm" class="btn btn-light add-list-button-form">Anuluj</button>
         </div>
         <div id="addlistbutton">
@@ -16,7 +16,14 @@
 </template>
 
 <script>
+import { ApiClient } from '../../../Api/ApiClient'
     export default {
+        props: ["boardId", "desiredPos"],
+
+        data: () => ({
+            newListName: "",
+        }),
+
         methods: {
             showForm() {
                 if (this.$el.querySelector("#showButton").style.display === "none") {
@@ -25,6 +32,18 @@
                 } else {
                     this.$el.querySelector("#showButton").style.display = "none"
                     this.$el.querySelector("#showFormAddList").style.display = "block"
+                }
+            },
+
+            handleAddList() {
+                if (this.newListName != "") {
+                    var self = this
+                    ApiClient.createList(this.boardId, this.newListName, this.desiredPos, function(response) {
+                        self.$emit("after-new-list")
+                        /* eslint-disable no-console */
+                        console.log("List add success" + response);
+                        /* eslint-enable no-console */
+                    })
                 }
             },
         }

@@ -4,7 +4,7 @@
 	<div class="board-main d-flex flex-row">
 		<draggable v-model="sections" @end="didDrag" class="board-main d-flex flex-row">
 			<BoardSection v-for="section in sections" v-bind:key="section.id" v-bind:sectionName="section.name" v-bind:id="section.id"/>
-			<AddList></AddList>
+			<AddList @after-new-list="downloadDetails" v-bind:boardId="boardId" v-bind:desiredPos="newListPos"></AddList>
 		</draggable>
     </div>
 	</div>
@@ -32,6 +32,7 @@ export default {
 		boardId: null,
 		boardName: "",
 		canEditTitle: false,
+		newListPos: 99,
     }),
 	// https://github.com/SortableJS/Vue.Draggable
     methods: {
@@ -59,21 +60,33 @@ export default {
 			})
 
 			ApiClient.updateBoardListOrder(this.boardId, bodyArray)
-		}
+		},
+
+		downloadDetails() {
+			var self = this
+			ApiClient.getBoardDetails(this.$route.params.user, this.$route.params.boardname, function(response) {
+				if (response.isPublic == true) {
+					self.sections = response.lists
+					// sort elements by numberOnBoard as API don't do that by default
+					self.sections.sort( (a, b) => (a.numberOnBoard < b.numberOnBoard) ? -1 : ((a.numberOnBoard > b.numberOnBoard) ? 1 : 0))
+					self.boardId = response.id
+					self.boardName = response.name
+					self.canEditTitle = UserStore.isOwningBoard(response.id)
+					var max = 0
+					self.sections.forEach(element => {
+						if (element.numberOnBoard > max) {
+							max = element.numberOnBoard
+						}
+					})
+
+					self.newListPos = max + 1
+				}
+			})
+		},
 	},
 	
 	mounted() {
-		var self = this
-		ApiClient.getBoardDetails(this.$route.params.user, this.$route.params.boardname, function(response) {
-			if (response.isPublic == true) {
-				self.sections = response.lists
-				// sort elements by numberOnBoard as API don't do that by default
-				self.sections.sort( (a, b) => (a.numberOnBoard < b.numberOnBoard) ? -1 : ((a.numberOnBoard > b.numberOnBoard) ? 1 : 0))
-				self.boardId = response.id
-				self.boardName = response.name
-				self.canEditTitle = UserStore.isOwningBoard(response.id)
-			}
-		})
+		this.downloadDetails()
 	}
 }
 </script>
