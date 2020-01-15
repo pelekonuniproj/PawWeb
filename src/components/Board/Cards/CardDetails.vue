@@ -10,6 +10,11 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
+                            <h6 class="modal-title">Lista zadań</h6>
+                            <Task class="form-group details-group" v-for="task in taskList" v-bind:key="task.id"
+                                    v-bind:isDone="task.isDone" v-bind:description="task.description"></Task>
+                        </div>
+                        <div class="form-group">
                             <div class="row">
                                 <div class="col-9">
                                     <input type="text" class="form-control" id="comment-label"
@@ -32,17 +37,23 @@
 
     import { ApiClient } from '../../../Api/ApiClient'
     import Detail from './CardDetail.vue'
+    import Task from "./Task";
 
     export default {
         name: "CardDetails",
         props: ['cardId', 'cardDescription', 'cardName'],
         components: {
+            Task,
             Detail
         },
 
         data: () => ({
             areVisible: false,
             detailsList: [],
+            taskList: [
+                {id: 1, isDone: true, description: "Zrobić zadanie"},
+                {id: 2, isDone: false, description: "Zrobić kolejne zadanie"},
+            ],
         }),
 
         methods:{
