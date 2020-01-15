@@ -1,7 +1,7 @@
 <template>
-    <div class="board-task">
+    <div class="board-card">
         <div v-on:click="showCardDetails(id)">
-            <p class="board-task-title">{{ name }}</p>
+            <p class="board-card-title">{{ name }}</p>
         </div>
         <Details v-if="areDetailsVisible" @close-details="closeCardDetails" v-bind:cardId="id" v-bind:cardDescription="desc"
                  v-bind:cardName="name"></Details>

@@ -8,7 +8,7 @@
             @showMoveAllCards="handleMoveAllCards" @showSort="handleSortAllCards" @showMoveList="handleShowMoveList"/>
         </div>
         <component v-bind:is="componentName" @show="close"/>
-        <BoardCard class="d-flex flex-column board-section-task-holder" v-for="card in cards" v-bind:key="card.id"
+        <BoardCard class="d-flex flex-column board-section-card-holder" v-for="card in cards" v-bind:key="card.id"
                    v-bind:name="card.title" v-bind:id="card.id" v-bind:desc="card.description" />
         <AddCard/>
     </div>
