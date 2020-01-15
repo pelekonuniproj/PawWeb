@@ -243,6 +243,21 @@ class Api {
 
         Vue.axios.put(endpoint, body, headers)
     }
+
+    updateBoardCardOrder(listId, body) {
+        const endpoint = this.apiHost + "/card/all/" + listId;
+        const authValue = "Bearer " + UserStore.getToken()
+
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        }
+
+        Vue.axios.put(endpoint, body, headers)
+    }
 }
 
 let ApiClient = new Api();

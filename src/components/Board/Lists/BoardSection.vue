@@ -56,15 +56,15 @@ import draggable from 'vuedraggable'
         mounted() {
             var self = this
             ApiClient.getCardsForBoardSection(this.id, function(response) {
-                self.tasks = response
-                self.tasks.sort( (a, b) => (a.numberOnList < b.numberOnList) ? -1 : ((a.numberOnList > b.numberOnList) ? 1 : 0))
+                self.cards = response
+                self.cards.sort( (a, b) => (a.numberOnList < b.numberOnList) ? -1 : ((a.numberOnList > b.numberOnList) ? 1 : 0))
             })
         },
         
         methods: {
             didDrag() {
                 var index = 1
-                this.tasks.forEach(element => {
+                this.cards.forEach(element => {
                     element.numberOnList = index
                     index += 1
                 })
@@ -73,13 +73,18 @@ import draggable from 'vuedraggable'
             },
 
             createRequestBodyAndSend() {
-                // var bodyArray = []
+                var bodyArray = []
 
-                // this.tasks.forEach(element => {
-                //     bodyArray.push({
-
-                //     })
-                // })
+                this.cards.forEach(element => {
+                    bodyArray.push({
+                        cardId: element.id,
+                        numberOnList: element.numberOnList
+                    })
+                })
+                /* eslint-disable no-console */
+                console.log("Send card update");
+                /* eslint-enable no-console */
+                ApiClient.updateBoardCardOrder(this.id, bodyArray)
             },
 
             handleShowAddCard() {
