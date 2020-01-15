@@ -288,7 +288,7 @@ class Api {
             }
         }
 
-        Vue.axios.put(endpoint, {
+        Vue.axios.post(endpoint, {
             attachment: dataAsBase64,
             name: attachName
         }, headers).then(response => onSuccess(response))
