@@ -15,7 +15,7 @@
 <script>
 
     export default {
-        name: "Detail",
+        name: "CardDetail",
         props: ["date", "content", "user"],
     }
 

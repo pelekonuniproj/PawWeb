@@ -8,14 +8,14 @@
             @showMoveAllCards="handleMoveAllCards" @showSort="handleSortAllCards" @showMoveList="handleShowMoveList"/>
         </div>
         <component v-bind:is="componentName" @show="close"/>
-        <BoardTask class="d-flex flex-column board-section-task-holder" v-for="task in tasks" v-bind:key="task.id"
-                    v-bind:name="task.title" v-bind:id="task.id" v-bind:desc="task.description" />
+        <BoardCard class="d-flex flex-column board-section-card-holder" v-for="card in cards" v-bind:key="card.id"
+                   v-bind:name="card.title" v-bind:id="card.id" v-bind:desc="card.description" />
         <AddCard/>
     </div>
 </template>
 
 <script>
-import BoardTask from './BoardTask.vue'
+import BoardCard from './BoardCard.vue'
 import { ApiClient } from '../../../Api/ApiClient'
 import AddCardMenuItem from "./Menu/AddCardMenuItem";
 import ArchiveAllCardsMenuItem from "./Menu/ArchiveAllCardsMenuItem";
@@ -37,22 +37,22 @@ import AddCard from "./AddCard";
             CopyListMenuItem,
             ArchiveAllCardsMenuItem,
             AddCardMenuItem,
-            BoardTask,
+            BoardCard,
         },
         
-        props: ['sectionName', 'tasksList', 'id'],
+        props: ['sectionName', 'cardsList', 'id'],
         
         data: function () {
             return {
                 componentName: null,
-                tasks: []
+                cards: []
             }
         },
         
         mounted() {
             var self = this
-            ApiClient.getTasksForBoardSection(this.id, function(response) {
-                self.tasks = response
+            ApiClient.getCardsForBoardSection(this.id, function(response) {
+                self.cards = response
             })
         },
         

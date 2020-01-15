@@ -2,7 +2,7 @@
         <div class="modal-dialog details-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ taskName }}</h5>
+                    <h5 class="modal-title">{{ cardName }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="closeDetails">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -31,11 +31,11 @@
 <script>
 
     import { ApiClient } from '../../../Api/ApiClient'
-    import Detail from './Detail.vue'
+    import Detail from './CardDetail.vue'
 
     export default {
-        name: "Details",
-        props: ['taskId', 'taskDescription', 'taskName'],
+        name: "CardDetails",
+        props: ['cardId', 'cardDescription', 'cardName'],
         components: {
             Detail
         },
@@ -54,13 +54,13 @@
             },
             downloadComments() {
                 var self = this;
-                ApiClient.getCommentsForTask(function(response) {
+                ApiClient.getCommentsForCard(function(response) {
                     self.detailsList = response;
                     for(var i = 0; i < self.detailsList.length; i++) {
                         var date = new Date(self.detailsList[i].addDate);
                         self.detailsList[i].addDate =date.getDay() + "." + date.getMonth() + "." + date.getFullYear();
                     }
-                }, self.taskId)
+                }, self.cardId)
             }
         },
 

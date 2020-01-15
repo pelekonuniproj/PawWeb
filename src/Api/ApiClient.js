@@ -23,8 +23,8 @@ class Api {
         })
     }
 
-    getCommentsForTask(callBack, taskId) {
-        const endpoint = this.apiHost + "/comment/card/" + taskId;
+    getCommentsForCard(callBack, cardId) {
+        const endpoint = this.apiHost + "/comment/card/" + cardId;
         const authValue = "Bearer " + UserStore.getToken()
         const headers = {
             headers: {
@@ -49,7 +49,7 @@ class Api {
         Vue.axios.get(endpoint).then(response => callback(response.data[0]))
     }
 
-    getTasksForBoardSection(sectionId, callBack) {
+    getCardsForBoardSection(sectionId, callBack) {
         var endpoint = this.apiHost + "/card/all/" + sectionId
         Vue.axios.get(endpoint).then(response => callBack(response.data))
     }

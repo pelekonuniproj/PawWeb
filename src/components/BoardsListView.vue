@@ -1,9 +1,9 @@
 <template>
     <div class="d-flex boards-list">
-        <div class="card board-card" v-for="board in boards"
+        <div class="card board-view" v-for="board in boards"
             v-bind:key="board.id">
-            <div class="board-card" v-on:click="showExactBoard(board.id,  board.name)">
-                <p class="board-card-text"> {{ board.name }} </p>
+            <div class="board-view" v-on:click="showExactBoard(board.id,  board.name)">
+                <p class="board-view-text"> {{ board.name }} </p>
             </div>
         </div>
     </div>
@@ -53,14 +53,14 @@ export default {
 
 <style scoped>
 
-    .board-card {
+    .board-view {
         width: 250px;
         flex: 0 0 250px;
         height: 80px;
         margin: 20px;
     }
 
-    .board-card-text {
+    .board-view-text {
         margin-left: 5px;
     }
 
