@@ -8,14 +8,14 @@
             @showMoveAllCards="handleMoveAllCards" @showSort="handleSortAllCards" @showMoveList="handleShowMoveList"/>
         </div>
         <component v-bind:is="componentName" @show="close"/>
-        <BoardTask class="d-flex flex-column board-section-task-holder" v-for="task in tasks" v-bind:key="task.id"
+        <BoardCard class="d-flex flex-column board-section-task-holder" v-for="task in tasks" v-bind:key="task.id"
                     v-bind:name="task.title" v-bind:id="task.id" v-bind:desc="task.description" />
         <AddCard/>
     </div>
 </template>
 
 <script>
-import BoardTask from './BoardTask.vue'
+import BoardCard from './BoardCard.vue'
 import { ApiClient } from '../../../Api/ApiClient'
 import AddCardMenuItem from "./Menu/AddCardMenuItem";
 import ArchiveAllCardsMenuItem from "./Menu/ArchiveAllCardsMenuItem";
@@ -37,7 +37,7 @@ import AddCard from "./AddCard";
             CopyListMenuItem,
             ArchiveAllCardsMenuItem,
             AddCardMenuItem,
-            BoardTask,
+            BoardCard,
         },
         
         props: ['sectionName', 'tasksList', 'id'],

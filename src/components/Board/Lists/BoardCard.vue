@@ -12,7 +12,7 @@
     import Details from "../Cards/CardDetails";
 
     export default {
-        name: "BoardTask",
+        name: "BoardCard",
         components: {Details},
         props: ['name', 'id', 'desc'],
 
