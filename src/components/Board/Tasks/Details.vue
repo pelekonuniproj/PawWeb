@@ -54,7 +54,7 @@
             },
             downloadComments() {
                 var self = this;
-                ApiClient.getCommentsForTask(function(response) {
+                ApiClient.getCommentsForCard(function(response) {
                     self.detailsList = response;
                     for(var i = 0; i < self.detailsList.length; i++) {
                         var date = new Date(self.detailsList[i].addDate);

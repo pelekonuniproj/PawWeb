@@ -51,7 +51,7 @@ import AddCard from "./AddCard";
         
         mounted() {
             var self = this
-            ApiClient.getTasksForBoardSection(this.id, function(response) {
+            ApiClient.getCardsForBoardSection(this.id, function(response) {
                 self.tasks = response
             })
         },
