@@ -36,14 +36,29 @@ export default {
 	// https://github.com/SortableJS/Vue.Draggable
     methods: {
 		didDrag() {
-			/* eslint-disable no-console */
-			console.log("List Order Changed!");
-			console.log(this.sections);
-             /* eslint-enable no-console */
+			var index = 1
+			this.sections.forEach(element => {
+				element.numberOnBoard = index
+				index += 1
+			});
+
+			this.makeApiCallBody()
 		},
 
 		changedTitleName(newName) {
 			ApiClient.updateBoardName(newName, this.boardId)
+		},
+
+		makeApiCallBody() {
+			var bodyArray = []
+			this.sections.forEach(element => {
+				bodyArray.push({
+					listId: element.id,
+					numberOnBoard: element.numberOnBoard
+				})
+			})
+
+			ApiClient.updateBoardListOrder(this.boardId, bodyArray)
 		}
 	},
 	
@@ -52,6 +67,8 @@ export default {
 		ApiClient.getBoardDetails(this.$route.params.user, this.$route.params.boardname, function(response) {
 			if (response.isPublic == true) {
 				self.sections = response.lists
+				// sort elements by numberOnBoard as API don't do that by default
+				self.sections.sort( (a, b) => (a.numberOnBoard < b.numberOnBoard) ? -1 : ((a.numberOnBoard > b.numberOnBoard) ? 1 : 0))
 				self.boardId = response.id
 				self.boardName = response.name
 				self.canEditTitle = UserStore.isOwningBoard(response.id)

@@ -8,8 +8,10 @@
             @showMoveAllCards="handleMoveAllCards" @showSort="handleSortAllCards" @showMoveList="handleShowMoveList"/>
         </div>
         <component v-bind:is="componentName" @show="close"/>
-        <BoardCard class="d-flex flex-column board-section-card-holder" v-for="card in cards" v-bind:key="card.id"
-                   v-bind:name="card.title" v-bind:id="card.id" v-bind:desc="card.description" />
+        <draggable v-model="cards" @end="didDrag">
+            <BoardCard class="d-flex flex-column board-section-card-holder" v-for="card in cards" v-bind:key="card.id"
+                    v-bind:name="card.title" v-bind:id="card.id" v-bind:desc="card.description" />
+        </draggable>
         <AddCard/>
     </div>
 </template>
@@ -25,6 +27,7 @@ import MoveAllCardsMenuItem from "./Menu/MoveAllCardsMenuItem";
 import MoveListMenuItem from "./Menu/MoveListMenuItem";
 import SortAllCardsMenuItem from "./Menu/SortAllCardsMenuItem";
 import AddCard from "./AddCard";
+import draggable from 'vuedraggable'
 
     export default {
         name: "BoardSection",
@@ -38,6 +41,7 @@ import AddCard from "./AddCard";
             ArchiveAllCardsMenuItem,
             AddCardMenuItem,
             BoardCard,
+            draggable,
         },
         
         props: ['sectionName', 'cardsList', 'id'],
@@ -53,10 +57,34 @@ import AddCard from "./AddCard";
             var self = this
             ApiClient.getCardsForBoardSection(this.id, function(response) {
                 self.cards = response
+                self.cards.sort( (a, b) => (a.numberOnList < b.numberOnList) ? -1 : ((a.numberOnList > b.numberOnList) ? 1 : 0))
             })
         },
         
         methods: {
+            didDrag() {
+                var index = 1
+                this.cards.forEach(element => {
+                    element.numberOnList = index
+                    index += 1
+                })
+
+                this.createRequestBodyAndSend()
+            },
+
+            createRequestBodyAndSend() {
+                var bodyArray = []
+
+                this.cards.forEach(element => {
+                    bodyArray.push({
+                        cardId: element.id,
+                        numberOnList: element.numberOnList
+                    })
+                })
+                
+                ApiClient.updateBoardCardOrder(this.id, bodyArray)
+            },
+
             handleShowAddCard() {
                 if(this.componentName===AddCardMenuItem){
                     this.componentName = null
