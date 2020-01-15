@@ -312,6 +312,24 @@ class Api {
             numberOnBoard: position
         }, headers).then(response => onSuccess(response))
     }
+
+    updateTask(taskId, name, done, onSuccess, onFail) {
+        const endpoint = this.apiHost + "/task/" + taskId;
+        const authValue = "Bearer " + UserStore.getToken();
+
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        };
+
+        Vue.axios.put(endpoint, {
+            name: name,
+            done: done,
+        }, headers).then(response => onSuccess(response.data)).catch(onFail())
+    }
 }
 
 let ApiClient = new Api();
