@@ -8,11 +8,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="comment-form">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-9">
-                                    <input type="text" class="form-control" id="comment-label"
+                                    <input type="text" class="form-control"  v-model="comment" id="comment-label"
                                            placeholder="Napisz komentarz...">
                                 </div>
                                 <div class="col-3">
@@ -43,6 +43,7 @@
         data: () => ({
             areVisible: false,
             detailsList: [],
+            comment: ""
         }),
 
         methods:{
@@ -50,7 +51,14 @@
                 this.$emit("close-details")
             },
             addComment() {
-
+                ApiClient.addCommentForCard(this.cardId, this.comment, function () {
+                    /* eslint-disable no-console */
+                    console.log("Success - comment added");
+                    document.getElementById("#comment-form").reset();
+                }, function (response) {
+                    /* eslint-disable no-console */
+                    console.log("Commit adding fail. " + response);
+                })
             },
             downloadComments() {
                 var self = this;

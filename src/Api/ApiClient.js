@@ -39,6 +39,24 @@ class Api {
         })
     }
 
+    addCommentForCard(cardId, comment, onSuccess, onFail) {
+        var endpoint = this.apiHost + "/comment/" + cardId;
+        const authValue = "Bearer " + UserStore.getToken();
+
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        };
+
+        Vue.axios.post(endpoint, {
+            'card': cardId,
+            'content' : comment,
+        }, headers).then(response => onSuccess(response.data)).catch(onFail())
+    }
+
     // getBoardsForTeam(teamId, callback) {
     //     var endpoint = this.apiHost + "/board/all/" + teamId;
     //     Vue.axios.get(endpoint).then(response => callback(response.data))
