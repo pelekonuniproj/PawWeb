@@ -103,11 +103,11 @@ class Api {
         }
 
         Vue.axios.post(endpoint, {
-            listId: cardListId,
             title: cardTitle,
             description : cardDescription,
             labelId : cardLabelId,
-            numberOnList : cardNumberOnList
+            numberOnList : cardNumberOnList,
+            listId: cardListId,
         }, headers).then(response => onSuccess(response))
     }
 
@@ -291,6 +291,25 @@ class Api {
         Vue.axios.post(endpoint, {
             attachment: dataAsBase64,
             name: attachName
+        }, headers).then(response => onSuccess(response))
+    }
+
+    createList(bId, listName, position, onSuccess) {
+        const endpoint = this.apiHost + "/list";
+        const authValue = "Bearer " + UserStore.getToken()
+
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        }
+
+        Vue.axios.post(endpoint, {
+            name: listName,
+            boardId: bId,
+            numberOnBoard: position
         }, headers).then(response => onSuccess(response))
     }
 }
