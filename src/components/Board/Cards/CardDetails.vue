@@ -1,55 +1,78 @@
 <template>
-        <div class="modal-dialog details-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ cardName }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="closeDetails">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+    <div class="modal details-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ cardName }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="closeDetails">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
 
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-9">
-                                <input v-model="newListName" type="text" class="form-control"
-                                       placeholder="Dodaj nową listę zadań...">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <input v-model="newListName" type="text" class="form-control"
+                                               placeholder="Dodaj nową listę zadań...">
+                                    </div>
+                                    <div class="col-3">
+                                        <button type="button" v-on:click="addNewTaskList"
+                                                class="btn btn-info my-button">Dodaj
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-3">
-                                <button type="button" v-on:click="addNewTaskList" class="btn btn-info my-button">Dodaj</button>
+                            <div class="form-group">
+                                <TasksList class="form-group" v-for="taskList in taskLists" v-bind:key="taskList.id"
+                                           v-bind:id="taskList.id"
+                                           v-bind:name="taskList.name" v-bind:taskJsons="taskList.taskJsons"
+                                           @refresh-window="downloadTasks"></TasksList>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <form id="comment-form">
+                                <div class="form-group">
+                                    <h6>Aktywność</h6>
+                                    <Detail class="form-group details-group" v-for="detail in detailsList"
+                                            v-bind:key="detail.id"
+                                            v-bind:content="detail.content" v-bind:date="detail.addDate"
+                                            v-bind:user="detail.userName"/>
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <input type="text" class="form-control" id="comment-label"
+                                                   placeholder="Napisz komentarz..." v-model="comment">
+                                        </div>
+                                        <div class="col-3">
+                                            <button type="button" v-on:click="addComment"
+                                                    class="btn btn-info my-button">Zapisz
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <input type="file" ref="file" v-on:change="handleAddAttachment"/>
+                                <button type="button" v-on:click="parseAttachment" class="btn btn-info my-button">
+                                    Dodaj
+                                </button>
+                                <div class="form-group">
+                                    <Attachment class="form-group" v-for="attachment in attachments"
+                                                v-bind:key="attachment.id" v-bind:id="attachment.id"
+                                                v-bind:attachment="attachment.attachment"
+                                                v-bind:name="attachment.name"></Attachment>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                        <div class="form-group">
-                            <TasksList class="form-group" v-for="taskList in taskLists" v-bind:key="taskList.id" v-bind:id="taskList.id"
-                                    v-bind:name="taskList.name" v-bind:taskJsons="taskList.taskJsons" @refresh-window="downloadTasks"></TasksList>
-                        </div>
-
-                    <div class="form-group">
-                        <input type="file" ref="file" v-on:change="handleAddAttachment" />
-                        <button type="button" v-on:click="parseAttachment" class="btn btn-info my-button">Dodaj</button>
-                    </div>
-
-                    <form id="comment-form">
-                        <div class="form-group">
-                            <h6>Aktywność</h6>
-                            <div class="row">
-                                <div class="col-9">
-                                    <input type="text" class="form-control" id="comment-label"
-                                           placeholder="Napisz komentarz..." v-model="comment">
-                                </div>
-                                <div class="col-3">
-                                    <button type="button" v-on:click="addComment" class="btn btn-info my-button">Zapisz</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                        <Detail class="form-group details-group" v-for="detail in detailsList" v-bind:key="detail.id"
-                                v-bind:content="detail.content" v-bind:date="detail.addDate" v-bind:user="detail.userName" />
                 </div>
             </div>
         </div>
+    </div>
 </template>
 
 <script>
@@ -57,13 +80,15 @@
     import { ApiClient } from '../../../Api/ApiClient'
     import Detail from './CardDetail.vue'
     import TasksList from "./TasksList";
+    import Attachment from "./Attachment";
 
     export default {
         name: "CardDetails",
         props: ['cardId', 'cardDescription', 'cardName'],
         components: {
             TasksList,
-            Detail
+            Detail,
+            Attachment
         },
 
         data: () => ({
@@ -171,11 +196,11 @@
 
     .details-dialog {
         display: block;
-        width: 460px;
+        width: 90%;
         padding: 20px;
         position: fixed;
-        left: 0;
-        top: 200px;
+        left: 5%;
+        top: 0;
         right: 0;
     }
     .details-group {
