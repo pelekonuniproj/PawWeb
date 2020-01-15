@@ -3,8 +3,8 @@
         <div class="form-check">
             <div class="row">
                 <div class="col-9">
-                    <input v-model="done" v-on:change="onDoneChanged" type="checkbox" class="form-check-input" id="taskDone">
-                    <input style="width: 270px" v-on:change="onTaskNameChanged" v-model="name" type="text"
+                    <input v-model="done" v-on:change="updateTask" type="checkbox" class="form-check-input" id="taskDone">
+                    <input style="width: 270px" v-on:change="updateTask" v-model="name" type="text"
                            class="form-check-label">
                 </div>
                 <div class="col-2">
@@ -24,11 +24,16 @@
         props: ["id", "done", "name"],
 
         methods: {
-            onDoneChanged() {
-                //TODO
-            },
-            onTaskNameChanged() {
-                //TODO
+            updateTask() {
+                /* eslint-disable no-console */
+                console.log(this.done);
+                ApiClient.updateTask(this.id, this.name, this.done, function () {
+                    /* eslint-disable no-console */
+                    console.log("Success - task updated");
+                }, function (response) {
+                    /* eslint-disable no-console */
+                    console.log("Fail - task updated: " + response);
+                })
             },
             onDeleteClicked() {
                 ApiClient.deleteTask(this.id, function () {
@@ -40,6 +45,10 @@
                 })
             }
         },
+
+        mounted() {
+            console.log(this.done + " " + this.name);
+        }
     }
 
 </script>
