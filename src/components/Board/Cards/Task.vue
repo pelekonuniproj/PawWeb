@@ -37,7 +37,7 @@
                     console.log("Success - task deleted");
                 }, function (response) {
                     /* eslint-disable no-console */
-                    console.log("Success - task deleted: " + response);
+                    console.log("Fail - task deleted: " + response);
                 })
             }
         },
