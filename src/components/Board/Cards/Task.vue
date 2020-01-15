@@ -25,8 +25,6 @@
 
         methods: {
             updateTask() {
-                /* eslint-disable no-console */
-                console.log(this.done);
                 ApiClient.updateTask(this.id, this.name, this.done, function () {
                     /* eslint-disable no-console */
                     console.log("Success - task updated");
@@ -46,9 +44,6 @@
             }
         },
 
-        mounted() {
-            console.log(this.done + " " + this.name);
-        }
     }
 
 </script>
