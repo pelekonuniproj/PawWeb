@@ -1,9 +1,9 @@
 <template>
     <div class="board-task">
-        <div v-on:click="showTask(id)">
+        <div v-on:click="showCardDetails(id)">
             <p class="board-task-title">{{ name }}</p>
         </div>
-        <Details v-if="areDetailsVisible" @close-details="closeTask" v-bind:cardId="id" v-bind:cardDescription="desc"
+        <Details v-if="areDetailsVisible" @close-details="closeCardDetails" v-bind:cardId="id" v-bind:cardDescription="desc"
                  v-bind:cardName="name"></Details>
     </div>
 </template>
@@ -21,13 +21,13 @@
         }),
 
         methods: {
-            showTask(id) {
+            showCardDetails(id) {
                 /* eslint-disable no-console */
                 console.log(id);
                 /* eslint-enable no-console */
                 this.areDetailsVisible = true;
             },
-            closeTask(id) {
+            closeCardDetails(id) {
                 /* eslint-disable no-console */
                 console.log(id);
                 this.areDetailsVisible = false;
