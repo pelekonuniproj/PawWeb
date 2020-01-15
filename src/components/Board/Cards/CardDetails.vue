@@ -10,7 +10,7 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <TasksList class="form-group" v-for="taskList in taskLists" v-bind:key="taskList.id"
+                            <TasksList class="form-group" v-for="taskList in taskLists" v-bind:key="taskList.id" v-bind:id="taskList.id"
                                     v-bind:name="taskList.name" v-bind:taskJsons="taskList.taskJsons"></TasksList>
                         </div>
                         <div class="form-group">

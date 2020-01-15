@@ -17,11 +17,11 @@
 
 <script>
 
-    // import {ApiClient} from '../../../Api/ApiClient'
+    import {ApiClient} from '../../../Api/ApiClient'
 
     export default {
         name: "Task",
-        props: ["done", "name"],
+        props: ["id", "done", "name"],
 
         methods: {
             onDoneChanged() {
@@ -32,15 +32,13 @@
             },
             onDeleteClicked() {
                 //TODO test
-                // eslint-disable-next-line no-console
-                console.log("task id: " + this.id + " " + this.key);
-                // ApiClient.deleteTask(this.id, function () {
-                //     /* eslint-disable no-console */
-                //     console.log("Success - task deleted");
-                // }, function (response) {
-                //     /* eslint-disable no-console */
-                //     console.log("Fail - task deleted: " + response);
-                // })
+                ApiClient.deleteTask(this.id, function () {
+                    /* eslint-disable no-console */
+                    console.log("Success - task deleted");
+                }, function (response) {
+                    /* eslint-disable no-console */
+                    console.log("Fail - task deleted: " + response);
+                })
             }
         },
     }

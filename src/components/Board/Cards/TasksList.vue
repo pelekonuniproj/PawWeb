@@ -1,7 +1,7 @@
 <template>
     <div class="form-group">
         <h6 class="modal-title" style="margin-bottom: 10px">{{ name }}</h6>
-        <Task class="form-group details-group" v-for="task in taskJsons" v-bind:key="task.id"
+        <Task class="form-group details-group" v-for="task in taskJsons" v-bind:key="task.id" v-bind:id="task.id"
               v-bind:isDone="task.isDone" v-bind:name="task.name"></Task>
         <div class="form-group">
             <div class="row">
@@ -24,7 +24,7 @@
 
     export default {
         name: "TasksList",
-        props: ["name", "taskJsons"],
+        props: ["id", "name", "taskJsons"],
 
         components: {
             Task
