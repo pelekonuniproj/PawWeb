@@ -14,6 +14,7 @@
                                     v-bind:name="taskList.name" v-bind:taskJsons="taskList.taskJsons"></TasksList>
                         </div>
                         <div class="form-group">
+                            <h6>Aktywność</h6>
                             <div class="row">
                                 <div class="col-9">
                                     <input type="text" class="form-control" id="comment-label"
