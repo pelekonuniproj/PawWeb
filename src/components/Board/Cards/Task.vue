@@ -8,7 +8,7 @@
                            class="form-check-label">
                 </div>
                 <div class="col-2">
-                    <Button class="btn btn-danger btn-sm" v-on:click="onDeleteClicked">Usuń</Button>
+                    <div class="btn btn-danger btn-sm" v-on:click="onDeleteClicked">Usuń</div>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
 
 <script>
 
-    import {ApiClient} from '../../../Api/ApiClient'
+    // import {ApiClient} from '../../../Api/ApiClient'
 
     export default {
         name: "Task",
@@ -32,13 +32,15 @@
             },
             onDeleteClicked() {
                 //TODO test
-                ApiClient.deleteTask(this.id, function () {
-                    /* eslint-disable no-console */
-                    console.log("Success - task deleted");
-                }, function (response) {
-                    /* eslint-disable no-console */
-                    console.log("Fail - task deleted: " + response);
-                })
+                // eslint-disable-next-line no-console
+                console.log("task id: " + this.id + " " + this.key);
+                // ApiClient.deleteTask(this.id, function () {
+                //     /* eslint-disable no-console */
+                //     console.log("Success - task deleted");
+                // }, function (response) {
+                //     /* eslint-disable no-console */
+                //     console.log("Fail - task deleted: " + response);
+                // })
             }
         },
     }
