@@ -180,6 +180,19 @@ class Api {
             "name": name,
         }, headers).then(response => onSuccess(response.data)).catch(onFail())
     }
+    deleteTaskList(taskListId, onSuccess, onFail) {
+        const endpoint = this.apiHost + "/task/list/" + taskListId;
+        const authValue = "Bearer " + UserStore.getToken();
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        };
+
+        Vue.axios.delete(endpoint, headers).then(response => onSuccess(response.data)).catch(onFail())
+    }
 
     addNewTaskList(cardId, name, onSuccess, onFail) {
         const endpoint = this.apiHost + "/task/list";
