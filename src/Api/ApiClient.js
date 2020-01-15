@@ -163,6 +163,23 @@ class Api {
 
         Vue.axios.delete(endpoint, headers).then(response => onSuccess(response.data)).catch(onFail())
     }
+
+    addTask(taskListId, name, onSuccess, onFail) {
+        const endpoint = this.apiHost + "/task";
+        const authValue = "Bearer " + UserStore.getToken();
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        };
+
+        Vue.axios.post(endpoint, {
+            "taskListId": taskListId,
+            "name": name,
+        }, headers).then(response => onSuccess(response.data)).catch(onFail())
+    }
 }
 
 let ApiClient = new Api();

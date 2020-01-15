@@ -6,7 +6,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-9">
-                    <input type="text" class="form-control add-task" id="comment-label"
+                    <input v-model="newTaskName" type="text" class="form-control add-task" id="comment-label"
                            placeholder="Dodaj zadanie...">
                 </div>
                 <div class="col-3">
@@ -19,6 +19,7 @@
 
 <script>
 
+    import {ApiClient} from '../../../Api/ApiClient'
     import Task from './Task.vue'
 
     export default {
@@ -31,11 +32,19 @@
 
         data: () => ({
             taskList: [],
+            newTaskName: ""
         }),
 
         methods: {
             addTask() {
-                //TODO
+                //TODO test
+                ApiClient.addTask(this.id, this.newTaskName, function () {
+                    /* eslint-disable no-console */
+                    console.log("Success - task added");
+                }, function (response) {
+                    /* eslint-disable no-console */
+                    console.log("Fail - task not added: " + response);
+                })
             }
         }
 
