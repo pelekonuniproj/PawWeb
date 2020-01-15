@@ -25,18 +25,20 @@
                             <TasksList class="form-group" v-for="taskList in taskLists" v-bind:key="taskList.id" v-bind:id="taskList.id"
                                     v-bind:name="taskList.name" v-bind:taskJsons="taskList.taskJsons"></TasksList>
                         </div>
+                    <form id="comment-form">
                         <div class="form-group">
                             <h6>Aktywność</h6>
                             <div class="row">
                                 <div class="col-9">
                                     <input type="text" class="form-control" id="comment-label"
-                                           placeholder="Napisz komentarz...">
+                                           placeholder="Napisz komentarz..." v-model="comment">
                                 </div>
                                 <div class="col-3">
                                     <button type="button" v-on:click="addComment" class="btn btn-info my-button">Zapisz</button>
                                 </div>
                             </div>
                         </div>
+                    </form>
                         <Detail class="form-group details-group" v-for="detail in detailsList" v-bind:key="detail.id"
                                 v-bind:content="detail.content" v-bind:date="detail.addDate" v-bind:user="detail.userName" />
                 </div>
@@ -62,7 +64,8 @@
             areVisible: false,
             detailsList: [],
             taskLists: [],
-            newListName: ""
+            newListName: "",
+            comment: ""
         }),
 
         methods:{
@@ -70,7 +73,15 @@
                 this.$emit("close-details")
             },
             addComment() {
-
+                //TODO połączenie z API (nie mamy userID)
+                ApiClient.addCommentForCard(this.cardId, this.comment, function () {
+                    /* eslint-disable no-console */
+                    console.log("Success - comment added");
+                    document.getElementById("#comment-form").reset();
+                }, function (response) {
+                    /* eslint-disable no-console */
+                    console.log("Fail - comment not added: " + response);
+                })
             },
             downloadComments() {
                 var self = this;

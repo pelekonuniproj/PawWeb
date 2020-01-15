@@ -210,6 +210,24 @@ class Api {
             "name": name,
         }, headers).then(response => onSuccess(response.data)).catch(onFail())
     }
+
+    addCommentForCard(cardId, comment, onSuccess, onFail) {
+        var endpoint = this.apiHost + "/comment/" + cardId;
+        const authValue = "Bearer " + UserStore.getToken();
+
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        };
+
+        Vue.axios.post(endpoint, {
+            'card': cardId,
+            'content' : comment,
+        }, headers).then(response => onSuccess(response.data)).catch(onFail())
+    }
 }
 
 let ApiClient = new Api();
