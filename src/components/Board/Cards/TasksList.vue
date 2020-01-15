@@ -11,7 +11,7 @@
             </div>
         </div>
         <Task class="form-group details-group" v-for="task in taskJsons" v-bind:key="task.id" v-bind:id="task.id"
-              v-bind:isDone="task.isDone" v-bind:name="task.name"></Task>
+              v-bind:done="task.done" v-bind:name="task.name"></Task>
         <div class="form-group">
             <div class="row">
                 <div class="col-9">

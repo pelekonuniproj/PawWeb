@@ -3,7 +3,7 @@
         <div class="form-check">
             <div class="row">
                 <div class="col-9">
-                    <input v-on:change="onDoneChanged" type="checkbox" class="form-check-input" id="taskDone">
+                    <input v-model="done" v-on:change="onDoneChanged" type="checkbox" class="form-check-input" id="taskDone">
                     <input style="width: 270px" v-on:change="onTaskNameChanged" v-model="name" type="text"
                            class="form-check-label">
                 </div>
