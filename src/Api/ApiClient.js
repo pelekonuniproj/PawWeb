@@ -333,6 +333,20 @@ class Api {
             done: done,
         }, headers).then(response => onSuccess(response.data)).catch(onFail())
     }
+
+    deleteAttachment(attachmentId, onSuccess, onFail) {
+        const endpoint = this.apiHost + "/attachment/" + attachmentId;
+        const authValue = "Bearer " + UserStore.getToken();
+        const headers = {
+            headers: {
+                'Authorization': authValue,
+                'Access-Control-Allow-Origin': '*',
+                'useCredentails': true
+            }
+        };
+
+        Vue.axios.delete(endpoint, headers).then(response => onSuccess(response.data)).catch(onFail())
+    }
 }
 
 let ApiClient = new Api();

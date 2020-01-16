@@ -13,6 +13,9 @@
 </template>
 
 <script>
+
+    import {ApiClient} from '../../../Api/ApiClient'
+
     export default {
         name: "Attachment",
         props: ["id", "name", "attachment"],
@@ -21,8 +24,14 @@
                 //TODO
             },
             deleteFile() {
-                //TODO
-            }
+                ApiClient.deleteAttachment(this.id, function () {
+                    /* eslint-disable no-console */
+                    console.log("Success - task deleted");
+                }, function (response) {
+                    /* eslint-disable no-console */
+                    console.log("Fail - task deleted: " + response);
+                })
+            },
         }
     }
 </script>
