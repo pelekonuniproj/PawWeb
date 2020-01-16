@@ -7,6 +7,7 @@
         </div>
         <div class="col-0">
             <i class="material-icons task-icon icon" v-on:click="downloadFile">file_download</i>
+            <i class="material-icons task-icon icon" style="margin-left: 5px" v-on:click="deleteFile">delete_forever</i>
         </div>
     </div>
 </template>
@@ -17,6 +18,9 @@
         props: ["id", "name", "attachment"],
         methods: {
             downloadFile() {
+                //TODO
+            },
+            deleteFile() {
                 //TODO
             }
         }
