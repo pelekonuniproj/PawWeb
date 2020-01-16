@@ -3,7 +3,7 @@
     <nav id="navBar" class="navbar navbar-light mynavbar">
 		<ul class="navbar-nav mr-auto">
 			<form class="form-inline">
-				<button type="button" class="btn btn-info my-button mynavbarform" v-on:click="goToMainPage" v-if="isLogged">{{ home }}</button>
+<!--				<button type="button" class="btn btn-info my-button mynavbarform" v-on:click="goToMainPage" v-if="isLogged">{{ home }}</button>-->
 				<button type="button" class="btn btn-info my-button  mynavbarform" v-on:click="goToBoards" v-if="isLogged">{{ storyboards }}</button>
 				<a class="navbar-brand navtitle">{{ title }}</a>
 				<button type="button" class="btn btn-info my-button  btn-add" v-on:click="showCreateNewBoard" v-if="isLogged"> + </button>
