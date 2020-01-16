@@ -62,6 +62,9 @@ export default {
 
     .board-view-text {
         margin-left: 5px;
+        color: #048998;
+        font-weight: bold;
+        font-size: 18px;
     }
 
     .boards-list {

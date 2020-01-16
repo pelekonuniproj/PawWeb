@@ -1,8 +1,8 @@
 <template>
-    <div class='board-section'>
+    <div class='board-section board-list'>
         <div class="d-flex flex-row justify-content-between">
             <form>
-                <input class="board-section-title" id="section-name" type="text" :value=sectionName>
+                <input class="board-section-title board-list-title" id="section-name" type="text" :value=sectionName>
             </form>
             <EditListMenu @showAddCard="handleShowAddCard" @showArchive="handleArchiveAllCards" @showCopyList="handleShowCopyList"
             @showMoveAllCards="handleMoveAllCards" @showSort="handleSortAllCards" @showMoveList="handleShowMoveList"/>
@@ -145,4 +145,10 @@ import draggable from 'vuedraggable'
     }
 </script>
 <style scoped>
+    .board-list {
+        background: #048998;
+    }
+    .board-list-title {
+        color: #FFFFFF;
+    }
 </style>
