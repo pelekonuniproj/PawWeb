@@ -2,13 +2,13 @@
     <div>
         <div class="add-list" id="showFormAddList">
             <form>
-                <input type="text" class="add-list-form" placeholder="Wprowadź tytuł listy">
+                <input type="text" class="add-list-form" placeholder="Wprowadź tytuł listy" v-model="newListName">
             </form>
-            <button type="button" class="btn btn-light add-list-button-form">Dodaj Listę</button>
-            <button type="button" v-on:click="showForm" class="btn btn-light add-list-button-form">Anuluj</button>
+            <button type="button" class="btn btn-info add-list-button-form my-button" v-on:click="handleAddList">Dodaj</button>
+            <button type="button" v-on:click="showForm" class="btn btn-info add-list-button-form my-button" style="background-color: transparent">Anuluj</button>
         </div>
         <div id="addlistbutton">
-            <button id="showButton" v-on:click="showForm" type="button" class="btn btn-light add-list-button">
+            <button id="showButton" v-on:click="showForm" type="button" class="btn btn-light add-list-button" style="background-color: #048998">
                 Dodaj kolejną listę
             </button>
         </div>
@@ -16,15 +16,36 @@
 </template>
 
 <script>
+import { ApiClient } from '../../../Api/ApiClient'
     export default {
+        props: ["boardId", "desiredPos"],
+
+        data: () => ({
+            newListName: "",
+        }),
+
         methods: {
             showForm() {
+                this.newListName = "";
                 if (this.$el.querySelector("#showButton").style.display === "none") {
                     this.$el.querySelector("#showButton").style.display = "block"
                     this.$el.querySelector("#showFormAddList").style.display = "none"
                 } else {
                     this.$el.querySelector("#showButton").style.display = "none"
                     this.$el.querySelector("#showFormAddList").style.display = "block"
+                }
+            },
+
+            handleAddList() {
+                if (this.newListName != "") {
+                    var self = this
+                    ApiClient.createList(this.boardId, this.newListName, this.desiredPos, function(response) {
+                        self.$emit("after-new-list");
+                        /* eslint-disable no-console */
+                        console.log("List add success" + response);
+                        /* eslint-enable no-console */
+                        self.showForm()
+                    })
                 }
             },
         }
@@ -40,7 +61,7 @@
         margin: 6px;
     }
     .add-list{
-        background-color: #e9e4e6;
+        background-color: #048998;
         border-radius: 5px;
         width: 272px;
         height: auto;
@@ -65,5 +86,9 @@
         background-color: rgba(255,255,255, 0.5);
         border: none;
         color:white;
+    }
+    .my-button {
+        background-color: #3bb4c1;
+        border-width: 0;
     }
 </style>

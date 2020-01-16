@@ -2,14 +2,14 @@
     <div>
         <div class="add-card" id="showFormAddCard">
             <form>
-                <input type="text" v-model.trim="title" class="add-card-form" placeholder="Wprowadź tytuł karty">
+                <input type="text" v-model.trim="title" class="add-card-form" id="add-card-form-text" placeholder="Wprowadź tytuł karty">
             </form>
-            <button type="button" v-on:click="createCard" class="btn btn-light add-card-form-button">Dodaj Kartę</button>
-            <button type="button" v-on:click="showForm" class="btn btn-light add-card-form-button">Anuluj</button>
+            <button type="button" v-on:click="createCard" class="btn btn-info my-button">Dodaj</button>
+            <button type="button" style="background: transparent" v-on:click="showForm" class="btn btn-info my-button">Anuluj</button>
         </div>
-        <div id="addCardButton">
+        <div id="addCardButton" class="row">
             <button id="showButton" v-on:click="showForm" type="button" class="btn btn-light add-card-button">
-                Dodaj kolejną kartę
+                <i class="material-icons task-icon">add</i> Dodaj kolejną kartę
             </button>
         </div>
     </div>
@@ -20,6 +20,8 @@
 
     export default {
         name: "AddCard",
+        props: ["listId"],
+
         data: function() {
         return {
             title: ""
@@ -27,6 +29,7 @@
 },
         methods: {
             showForm() {
+                this.title = "";
                 if (this.$el.querySelector("#showButton").style.display === "none") {
                     this.$el.querySelector("#showButton").style.display = "block"
                     this.$el.querySelector("#showFormAddCard").style.display = "none"
@@ -36,15 +39,14 @@
                 }
             },
             createCard(){
-                ApiClient.createCard(this.$parent.id, this.title, "", 10,4,function(){
+                var self = this
+                ApiClient.createCard(this.listId, this.title, "", 1, 1, function(response) {
                     /* eslint-disable no-console */
-                    console.log("On login success");
+                    console.log("Card added: " + response);
                     /* eslint-enable no-console */
-                }, function(response){
-                    /* eslint-disable no-console */
-                    console.log("On login fail" + response);
-                    /* eslint-enable no-console */
+                    self.$emit("refresh-cards")
                 })
+                this.showForm()
             }
         }
     }
@@ -58,7 +60,7 @@
         width: 256px;
     }
     .add-card{
-        background-color: #e9e4e6;
+        background-color: transparent;
         border-radius: 5px;
         width: 256px;
         height: auto;
@@ -79,8 +81,14 @@
         margin-left: 8px;
         padding: 2px;
         width: 256px;
-        background-color: rgba(255,255,255, 0.5);
+        background-color: transparent;
         border: none;
-        color:dimgrey;
+        color: white;
+    }
+    .my-button {
+        background-color: #3bb4c1;
+        border-width: 0;
+        margin-top: 10px;
+        margin-right: 10px;
     }
 </style>

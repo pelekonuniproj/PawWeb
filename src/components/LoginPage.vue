@@ -16,20 +16,20 @@
         </div>
         <div class="col-4 offset-1">
             <label class="login-title-label">Zarejestruj</label>
-            <form>
+            <form id="register-form" action="">
                 <div class="form-group">
                     <label class="login-label" for="inputRegistrationLogin">Login</label>
-                    <input type="text" class="form-control" id="inputRegistrationLogin" aria-describedby="emailHelp" placeholder="Wpisz swój login">
+                    <input type="text" class="form-control" id="inputRegistrationLogin" aria-describedby="emailHelp" v-model="newUserName" placeholder="Wpisz swój login">
                 </div>
                 <div class="form-group">
                     <label class="login-label" for="inputRegistrationPassword">Hasło</label>
-                    <input type="password" class="form-control" id="inputRegistrationPassword" placeholder="Wpisz swoje hasło">
+                    <input type="password" class="form-control" id="inputRegistrationPassword" v-model="password" placeholder="Wpisz swoje hasło">
                 </div>
                 <div class="form-group">
                     <label class="login-label" for="inputRegistrationRepeatedPassword">Powtórz hasło</label>
-                    <input type="password" class="form-control" id="inputRegistrationRepeatedPassword" placeholder="Powtórz swoje hasło">
+                    <input type="password" class="form-control" id="inputRegistrationRepeatedPassword" v-model="repeatedPassword" placeholder="Powtórz swoje hasło">
                 </div>
-                <button type="submit" class="btn btn-info login-button">Zarejestruj</button>
+                <button type="button" class="btn btn-info login-button" v-on:click="registerUser">Zarejestruj</button>
             </form>
         </div>
     </div>
@@ -38,6 +38,7 @@
 <script>
     import { ApiClient } from '../Api/ApiClient'
     import { UserStore } from '../DataHolders/User'
+    import { Events } from '../States/EventObserver.js'
 
     export default {
         name: 'LoginPage',
@@ -47,6 +48,9 @@
         data: () => ({
             userName: "",
             pass: "",
+            newUserName: "",
+            password: "",
+            repeatedPassword: ""
         }),
 
         methods: {
@@ -55,6 +59,7 @@
                 ApiClient.loginUser(this.userName, this.pass, function(response){
                     UserStore.setToken(response.access_token)
                     UserStore.setUserName(self.userName)
+                    UserStore.setUserId(response.userId)
                     /* eslint-disable no-console */
                     console.log("On login success");
                     /* eslint-enable no-console */
@@ -68,9 +73,33 @@
 
             registerUser() {
 
+                var self = this;
+
+                if (this.password.length >= 3) {
+
+                    if (this.password === this.repeatedPassword) {
+                        ApiClient.registerUser(this.newUserName, this.password, function(){
+                            alert("Rejestracja przebiegła pomyślnie");
+                            self.newUserName ="";
+                            self.password = "";
+                            self.repeatedPassword = "";
+                        }, function(response){
+                            /* eslint-disable no-console */
+                            console.log("Rejestracja nieudana: " + response);
+                            /* eslint-enable no-console */
+                        })
+                    } else {
+                        alert("Hasła różnią się.")
+                    }
+
+                } else {
+                    alert("Hasło musi mieć minimum 3 znaki.")
+                }
+
             },
 
             forwardToMainPage() {
+                Events.callNavBarRefresh()
                 this.$router.push("/")
             }
         },

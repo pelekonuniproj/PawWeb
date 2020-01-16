@@ -1,21 +1,23 @@
 <template>
-    <div class='board-section'>
+    <div class='board-section board-list'>
         <div class="d-flex flex-row justify-content-between">
             <form>
-                <input class="board-section-title" id="section-name" type="text" :value=sectionName>
+                <input class="board-section-title board-list-title" id="section-name" type="text" :value=sectionName>
             </form>
             <EditListMenu @showAddCard="handleShowAddCard" @showArchive="handleArchiveAllCards" @showCopyList="handleShowCopyList"
             @showMoveAllCards="handleMoveAllCards" @showSort="handleSortAllCards" @showMoveList="handleShowMoveList"/>
         </div>
         <component v-bind:is="componentName" @show="close"/>
-        <BoardTask class="d-flex flex-column board-section-task-holder" v-for="task in tasks" v-bind:key="task.id"
-                    v-bind:name="task.title" v-bind:id="task.id" v-bind:desc="task.description" />
-        <AddCard/>
+        <draggable v-model="cards" @end="didDrag">
+            <BoardCard class="d-flex flex-column board-section-card-holder" v-for="card in cards" v-bind:key="card.id"
+                    v-bind:name="card.title" v-bind:id="card.id" v-bind:desc="card.description" />
+        </draggable>
+        <AddCard v-bind:listId="id" @refresh-cards="downloadCards" />
     </div>
 </template>
 
 <script>
-import BoardTask from './BoardTask.vue'
+import BoardCard from './BoardCard.vue'
 import { ApiClient } from '../../../Api/ApiClient'
 import AddCardMenuItem from "./Menu/AddCardMenuItem";
 import ArchiveAllCardsMenuItem from "./Menu/ArchiveAllCardsMenuItem";
@@ -25,6 +27,7 @@ import MoveAllCardsMenuItem from "./Menu/MoveAllCardsMenuItem";
 import MoveListMenuItem from "./Menu/MoveListMenuItem";
 import SortAllCardsMenuItem from "./Menu/SortAllCardsMenuItem";
 import AddCard from "./AddCard";
+import draggable from 'vuedraggable'
 
     export default {
         name: "BoardSection",
@@ -37,26 +40,55 @@ import AddCard from "./AddCard";
             CopyListMenuItem,
             ArchiveAllCardsMenuItem,
             AddCardMenuItem,
-            BoardTask,
+            BoardCard,
+            draggable,
         },
         
-        props: ['sectionName', 'tasksList', 'id'],
+        props: ['sectionName', 'cardsList', 'id'],
         
         data: function () {
             return {
                 componentName: null,
-                tasks: []
+                cards: []
             }
         },
         
         mounted() {
-            var self = this
-            ApiClient.getTasksForBoardSection(this.id, function(response) {
-                self.tasks = response
-            })
+            this.downloadCards()
         },
         
         methods: {
+            downloadCards() {
+                var self = this
+                ApiClient.getCardsForBoardSection(this.id, function(response) {
+                    self.cards = response
+                    self.cards.sort( (a, b) => (a.numberOnList < b.numberOnList) ? -1 : ((a.numberOnList > b.numberOnList) ? 1 : 0))
+                })
+            },
+
+            didDrag() {
+                var index = 1
+                this.cards.forEach(element => {
+                    element.numberOnList = index
+                    index += 1
+                })
+
+                this.createRequestBodyAndSend()
+            },
+
+            createRequestBodyAndSend() {
+                var bodyArray = []
+
+                this.cards.forEach(element => {
+                    bodyArray.push({
+                        cardId: element.id,
+                        numberOnList: element.numberOnList
+                    })
+                })
+                
+                ApiClient.updateBoardCardOrder(this.id, bodyArray)
+            },
+
             handleShowAddCard() {
                 if(this.componentName===AddCardMenuItem){
                     this.componentName = null
@@ -113,4 +145,10 @@ import AddCard from "./AddCard";
     }
 </script>
 <style scoped>
+    .board-list {
+        background: #048998;
+    }
+    .board-list-title {
+        color: #FFFFFF;
+    }
 </style>
