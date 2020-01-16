@@ -4,10 +4,10 @@
             <div class="row">
                 <div class="col-9">
                     <input v-model="done" v-on:change="updateTask" type="checkbox" class="form-check-input" id="taskDone">
-                    <input style="width: 270px" v-on:change="updateTask" v-model="name" type="text"
+                    <input v-on:change="updateTask" v-model="name" type="text"
                            class="form-check-label">
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                     <i class="material-icons task-icon" v-on:click="onDeleteClicked">delete</i>
                 </div>
             </div>

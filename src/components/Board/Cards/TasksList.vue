@@ -12,11 +12,11 @@
               v-bind:done="task.done" v-bind:name="task.name"></Task>
         <div class="form-group">
             <div class="row">
-                <div class="col-9">
+                <div class="col-10">
                     <input v-model="newTaskName" type="text" class="form-control add-task" id="task-comment-label"
                            placeholder="Dodaj zadanie...">
                 </div>
-                <div class="col-3">
+                <div class="col-0">
                     <button type="button" v-on:click="addTask" class="btn btn-info my-button btn-sm">Dodaj</button>
                 </div>
             </div>
@@ -72,7 +72,7 @@
 
 <style scoped>
     .add-task {
-        height: 20px;
+        height: 25px;
     }
     .task-list-icon {
         font-size: 20px;

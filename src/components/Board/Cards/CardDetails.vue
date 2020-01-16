@@ -8,70 +8,74 @@
                 </button>
             </div>
             <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <h5 class="title">Listy zadań</h5>
+                            <div class="row">
+                                <div class="col-10">
+                                    <input v-model="newListName" type="text" class="form-control input-style"
+                                           placeholder="Dodaj nową listę zadań...">
+                                </div>
+                                <div class="col-0">
+                                    <button type="button" v-on:click="addNewTaskList"
+                                            class="btn btn-info btn-sm my-button">Dodaj
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <TasksList class="form-group" v-for="taskList in taskLists" v-bind:key="taskList.id"
+                                       v-bind:id="taskList.id"
+                                       v-bind:name="taskList.name" v-bind:taskJsons="taskList.taskJsons"
+                                       @refresh-window="downloadTasks"></TasksList>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <form id="comment-form">
                             <div class="form-group">
-                                <h5>Listy zadań</h5>
+                                <h5 class="title">Aktywność</h5>
+                                <Detail class="form-group details-group" v-for="detail in detailsList"
+                                        v-bind:key="detail.id"
+                                        v-bind:content="detail.content" v-bind:date="detail.addDate"
+                                        v-bind:user="detail.userName"/>
                                 <div class="row">
-                                    <div class="col-9">
-                                        <input v-model="newListName" type="text" class="form-control"
-                                               placeholder="Dodaj nową listę zadań...">
+                                    <div class="col-10">
+                                        <input type="text" class="form-control input-style" id="comment-label"
+                                               placeholder="Napisz komentarz..." v-model="comment">
                                     </div>
-                                    <div class="col-3">
-                                        <button type="button" v-on:click="addNewTaskList"
-                                                class="btn btn-info my-button">Dodaj
-                                        </button>
+                                    <div class="col-0">
+                                        <i class="material-icons task-icon icon" v-on:click="addComment">send</i>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <TasksList class="form-group" v-for="taskList in taskLists" v-bind:key="taskList.id"
-                                           v-bind:id="taskList.id"
-                                           v-bind:name="taskList.name" v-bind:taskJsons="taskList.taskJsons"
-                                           @refresh-window="downloadTasks"></TasksList>
+                        </form>
+                    </div>
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <h5 class="title">Załączniki</h5>
+                            <div class="row">
+                                <div class="col-10">
+                                    <input type="file" ref="file" v-on:change="handleAddAttachment"/>
+                                </div>
+                                <div class="col-0">
+                                    <button type="button" v-on:click="parseAttachment"
+                                            class="btn btn-info btn-sm my-button">Dodaj
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-sm">
-                            <form id="comment-form">
-                                <div class="form-group">
-                                    <h5>Aktywność</h5>
-                                    <Detail class="form-group details-group" v-for="detail in detailsList"
-                                            v-bind:key="detail.id"
-                                            v-bind:content="detail.content" v-bind:date="detail.addDate"
-                                            v-bind:user="detail.userName"/>
-                                    <div class="row">
-                                        <div class="col-9">
-                                            <input type="text" class="form-control" id="comment-label"
-                                                   placeholder="Napisz komentarz..." v-model="comment">
-                                        </div>
-                                        <div class="col-3">
-                                            <button type="button" v-on:click="addComment"
-                                                    class="btn btn-info my-button">Zapisz
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-sm">
-                            <div class="form-group">
-                                <h5>Załączniki</h5>
-                                <input type="file" ref="file" v-on:change="handleAddAttachment"/>
-                                <button type="button" v-on:click="parseAttachment" class="btn btn-info my-button">
-                                    Dodaj
-                                </button>
-                                <div class="form-group">
-                                    <Attachment class="form-group" v-for="attachment in attachments"
-                                                v-bind:key="attachment.id" v-bind:id="attachment.id"
-                                                v-bind:attachment="attachment.attachment"
-                                                v-bind:name="attachment.name"></Attachment>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <Attachment class="form-group" v-for="attachment in attachments"
+                                        v-bind:key="attachment.id" v-bind:id="attachment.id"
+                                        v-bind:attachment="attachment.attachment"
+                                        v-bind:name="attachment.name"></Attachment>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </template>
 
 <script>
@@ -210,6 +214,19 @@
     }
     .details-group {
         margin-left: 20px;
+    }
+
+    .input-style {
+        height: 25px;
+    }
+
+    .title {
+        margin-bottom: 15px;
+    }
+
+    .icon {
+        color: #17A2B8;
+        cursor: pointer;
     }
 
 </style>
