@@ -8,7 +8,7 @@
                            class="form-check-label">
                 </div>
                 <div class="col-2">
-                    <div class="btn btn-danger btn-sm" v-on:click="onDeleteClicked">Usuń</div>
+                    <i class="material-icons task-icon" v-on:click="onDeleteClicked">delete</i>
                 </div>
             </div>
         </div>
@@ -49,5 +49,9 @@
 </script>
 
 <style scoped>
-
+.task-icon {
+    font-size: 20px;
+    color: #424242;
+    cursor: pointer ;
+}
 </style>

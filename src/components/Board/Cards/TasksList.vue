@@ -2,11 +2,9 @@
     <div class="form-group">
         <div class="container">
             <div class="row">
+                <h6 class="modal-title" style="margin-bottom: 10px">{{ name }}</h6>
                 <div class="col-sm">
-                    <h6 class="modal-title" style="margin-bottom: 10px">{{ name }}</h6>
-                </div>
-                <div class="col-sm">
-                    <Button class="btn btn-danger btn-sm" v-on:click="onDeleteClicked">Usuń listę zadań</Button>
+                    <i class="material-icons task-list-icon" v-on:click="onDeleteClicked">delete_forever</i>
                 </div>
             </div>
         </div>
@@ -75,5 +73,10 @@
 <style scoped>
     .add-task {
         height: 20px;
+    }
+    .task-list-icon {
+        font-size: 20px;
+        color: #424242;
+        cursor: pointer ;
     }
 </style>
