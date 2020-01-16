@@ -51,7 +51,7 @@
 <style scoped>
 .task-icon {
     font-size: 20px;
-    color: #424242;
+    color: #17A2B8;
     cursor: pointer ;
 }
 </style>
