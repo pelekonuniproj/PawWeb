@@ -2,13 +2,16 @@
     <div class="row" style="margin-left: 10px">
         <div class="form-check">
             <div class="row">
-                <div class="col-9">
+                <div class="col-8">
                     <input v-model="done" v-on:change="updateTask" type="checkbox" class="form-check-input" id="taskDone">
                     <input v-on:change="updateTask" v-model="name" type="text"
                            class="form-check-label">
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <i class="material-icons task-icon" v-on:click="onDeleteClicked">delete</i>
+                </div>
+                <div class="col-0">
+                    <i class="material-icons task-icon" v-on:click="changeToCard">create_new_folder</i>
                 </div>
             </div>
         </div>
@@ -41,6 +44,9 @@
                     /* eslint-disable no-console */
                     console.log("Fail - task deleted: " + response);
                 })
+            },
+            changeToCard() {
+                //TODO
             }
         },
 
