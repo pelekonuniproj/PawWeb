@@ -30,7 +30,7 @@ export default {
     home: 'Home',
     storyboards: 'Tablice',
     title: 'Trello',
-	user: "Użytkownik " + UserStore.getCurrentUser(),
+	user: UserStore.getCurrentUser(),
 	isLogged: false,
   }),
 
@@ -58,7 +58,7 @@ export default {
 	},
 
 	refreshVisibility: function() {
-		this.user = "Użytkownik " + UserStore.getCurrentUser()
+		this.user = UserStore.getCurrentUser()
 		this.isLogged = UserStore.isLoggedIn()
 	}
   },
