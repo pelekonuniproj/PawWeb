@@ -1,6 +1,6 @@
 <template>
         <div class="card">
-            <div class="card-body">Plik</div>
+            <div class="card-body">{{ name }}</div>
     </div>
 </template>
 

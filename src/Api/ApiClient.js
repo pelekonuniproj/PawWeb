@@ -261,7 +261,7 @@ class Api {
         Vue.axios.put(endpoint, body, headers)
     }
 
-    getAttachmentsForCard(cardId, onSuccess) {
+    getAttachmentsForCard(cardId, callBack) {
         const endpoint = this.apiHost + "/attachment/card/" + cardId;
         const authValue = "Bearer " + UserStore.getToken()
 
@@ -271,9 +271,12 @@ class Api {
                 'Access-Control-Allow-Origin': '*',
                 'useCredentails': true
             }
-        }
+        };
 
-        Vue.axios.get(endpoint, headers).then(response => onSuccess(response))
+        Vue.axios.get(endpoint, headers).then(response => {
+            callBack(response.data)
+        });
+
     }
 
     addAttachmentForCard(cardId, attachName, dataAsBase64, onSuccess) {
