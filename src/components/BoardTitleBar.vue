@@ -1,6 +1,6 @@
 <template>
     <div class="board-name-bar">
-        <input type="text" v-model="boardName" v-bind:disabled="!canEdit" v-on:change="onTitleChanged" />   
+        <input class="board-name" type="text" v-model="boardName" v-bind:disabled="!canEdit" v-on:change="onTitleChanged" />
     </div>
 </template>
 
@@ -22,3 +22,11 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    .board-name {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+    }
+</style>
