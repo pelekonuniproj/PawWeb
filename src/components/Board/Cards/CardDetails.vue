@@ -129,14 +129,17 @@
             },
 
             sendAttachment(base64Str) {
-                var self = this
+                var self = this;
                 ApiClient.addAttachmentForCard(this.cardId, this.attachmentToAdd.name, base64Str, function(response) {
-                    self.attachmentToAdd = null
-                    self.downloadAttachments()
+                    self.attachmentToAdd = null;
+                    self.downloadAttachments();
                     /* eslint-disable no-console */
                     console.log("Attachment add success" + response);
                     /* eslint-enable no-console */
-                })
+                });
+                // eslint-disable-next-line no-console
+                console.log("dodał nowy załącznik: " + this.newListName);
+                self.addDetail("dodał nowy załącznik: " + this.newListName);
             },
 
             addComment() {
@@ -175,15 +178,19 @@
             },
 
             addNewTaskList() {
-                var self = this
+                var self = this;
                 ApiClient.addNewTaskList(this.cardId, this.newListName, function () {
-                    self.newListName = ""
-                    self.downloadTasks()
+                    self.newListName = "";
+                    self.downloadTasks();
+                    // eslint-disable-next-line no-console
                 }, function (response) {
                     /* eslint-disable no-console */
                     console.log("Fail - task not added: " + response);
                     /* eslint-enable no-console */
-                })
+                });
+                // eslint-disable-next-line no-console
+                console.log("utworzył nową listę zadań: " + this.newListName);
+                self.addDetail("utworzył nową listę zadań: " + this.newListName);
             },
 
             downloadAttachments() {
