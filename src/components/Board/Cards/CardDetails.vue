@@ -137,9 +137,7 @@
                     console.log("Attachment add success" + response);
                     /* eslint-enable no-console */
                 });
-                // eslint-disable-next-line no-console
-                console.log("dodał nowy załącznik: " + this.newListName);
-                self.addDetail("dodał nowy załącznik: " + this.newListName);
+                self.addDetail("dodał nowy załącznik: " + this.attachmentToAdd.name);
             },
 
             addComment() {
@@ -188,8 +186,6 @@
                     console.log("Fail - task not added: " + response);
                     /* eslint-enable no-console */
                 });
-                // eslint-disable-next-line no-console
-                console.log("utworzył nową listę zadań: " + this.newListName);
                 self.addDetail("utworzył nową listę zadań: " + this.newListName);
             },
 
