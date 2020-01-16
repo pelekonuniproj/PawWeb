@@ -26,6 +26,7 @@ import { ApiClient } from '../../../Api/ApiClient'
 
         methods: {
             showForm() {
+                this.newListName = "";
                 if (this.$el.querySelector("#showButton").style.display === "none") {
                     this.$el.querySelector("#showButton").style.display = "block"
                     this.$el.querySelector("#showFormAddList").style.display = "none"
@@ -39,10 +40,11 @@ import { ApiClient } from '../../../Api/ApiClient'
                 if (this.newListName != "") {
                     var self = this
                     ApiClient.createList(this.boardId, this.newListName, this.desiredPos, function(response) {
-                        self.$emit("after-new-list")
+                        self.$emit("after-new-list");
                         /* eslint-disable no-console */
                         console.log("List add success" + response);
                         /* eslint-enable no-console */
+                        self.showForm()
                     })
                 }
             },
