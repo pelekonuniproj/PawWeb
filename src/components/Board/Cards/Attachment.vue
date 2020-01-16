@@ -26,10 +26,10 @@
             deleteFile() {
                 ApiClient.deleteAttachment(this.id, function () {
                     /* eslint-disable no-console */
-                    console.log("Success - task deleted");
+                    console.log("Success - attachment deleted");
                 }, function (response) {
                     /* eslint-disable no-console */
-                    console.log("Fail - task deleted: " + response);
+                    console.log("Fail - attachment not deleted: " + response);
                 })
             },
         }
