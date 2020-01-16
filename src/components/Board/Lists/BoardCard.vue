@@ -21,15 +21,11 @@
         }),
 
         methods: {
-            showCardDetails(id) {
-                /* eslint-disable no-console */
-                console.log(id);
+            showCardDetails() {
                 /* eslint-enable no-console */
                 this.areDetailsVisible = true;
             },
-            closeCardDetails(id) {
-                /* eslint-disable no-console */
-                console.log(id);
+            closeCardDetails() {
                 this.areDetailsVisible = false;
             }
         }
