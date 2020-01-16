@@ -4,10 +4,13 @@
         <div class="my-modal">
             <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" v-on:click="closeView"> X </button>
+                        <h5 class="modal-title">Utwórz nową tablicę</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="closeView">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
-                        <input type="text" placeholder="Dodaj nazwe tablicy" v-model="typedName" v-on:change="onNameInputChange" />
+                        <input type="text" placeholder="Nazwa tablicy..." v-model="typedName" v-on:change="onNameInputChange" />
                     </div>
                     <div class="modal-footer">
                         <button type="button" v-bind:class="submitBtnStyle" v-on:click="createTable" v-bind:disabled="submitBtnDisabled">Utwórz tablice</button>
