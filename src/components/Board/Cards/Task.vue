@@ -10,9 +10,9 @@
                 <div class="col-2">
                     <i class="material-icons task-icon" v-on:click="onDeleteClicked">delete</i>
                 </div>
-                <div class="col-0">
-                    <i class="material-icons task-icon" v-on:click="changeToCard">create_new_folder</i>
-                </div>
+<!--                <div class="col-0">-->
+<!--                    <i class="material-icons task-icon" v-on:click="changeToCard">create_new_folder</i>-->
+<!--                </div>-->
             </div>
         </div>
     </div>
