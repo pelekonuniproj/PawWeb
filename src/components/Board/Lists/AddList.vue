@@ -4,11 +4,11 @@
             <form>
                 <input type="text" class="add-list-form" placeholder="Wprowadź tytuł listy" v-model="newListName">
             </form>
-            <button type="button" class="btn btn-light add-list-button-form" v-on:click="handleAddList">Dodaj Listę</button>
-            <button type="button" v-on:click="showForm" class="btn btn-light add-list-button-form">Anuluj</button>
+            <button type="button" class="btn btn-info add-list-button-form my-button" v-on:click="handleAddList">Dodaj</button>
+            <button type="button" v-on:click="showForm" class="btn btn-info add-list-button-form my-button" style="background-color: transparent">Anuluj</button>
         </div>
         <div id="addlistbutton">
-            <button id="showButton" v-on:click="showForm" type="button" class="btn btn-light add-list-button">
+            <button id="showButton" v-on:click="showForm" type="button" class="btn btn-light add-list-button" style="background-color: #048998">
                 Dodaj kolejną listę
             </button>
         </div>
@@ -59,7 +59,7 @@ import { ApiClient } from '../../../Api/ApiClient'
         margin: 6px;
     }
     .add-list{
-        background-color: #e9e4e6;
+        background-color: #048998;
         border-radius: 5px;
         width: 272px;
         height: auto;
@@ -84,5 +84,9 @@ import { ApiClient } from '../../../Api/ApiClient'
         background-color: rgba(255,255,255, 0.5);
         border: none;
         color:white;
+    }
+    .my-button {
+        background-color: #3bb4c1;
+        border-width: 0;
     }
 </style>
