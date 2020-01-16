@@ -182,12 +182,6 @@
                 var self = this;
                 ApiClient.getAttachmentsForCard(this.cardId, function(response) {
                     self.attachments = response;
-                    // eslint-disable-next-line no-console
-                    console.log("ilosc zalacznikow: " + self.attachments.length);
-                    // eslint-disable-next-line no-console
-                    console.log("zalacznik pierwszy: " + self.attachments[0]);
-                    // eslint-disable-next-line no-console
-                    console.log("test");
                 })
             }
         },
