@@ -141,8 +141,13 @@
 
             addComment() {
                 var self = this
-                ApiClient.addCommentForCard(this.cardId, this.comment, function () {
-                    self.comment = ""
+                self.addDetail(this.comment);
+            },
+
+            addDetail(detail) {
+                var self = this;
+                ApiClient.addCommentForCard(this.cardId, detail, function () {
+                    self.comment = "";
                     self.downloadComments()
                 }, function (response) {
                     /* eslint-disable no-console */
@@ -186,7 +191,7 @@
                 ApiClient.getAttachmentsForCard(this.cardId, function(response) {
                     self.attachments = response;
                 })
-            }
+            },
         },
 
         mounted () {
