@@ -8,11 +8,10 @@
                 </button>
             </div>
             <div class="modal-body">
-
-                <div class="container">
                     <div class="row">
                         <div class="col-sm">
                             <div class="form-group">
+                                <h5>Listy zadań</h5>
                                 <div class="row">
                                     <div class="col-9">
                                         <input v-model="newListName" type="text" class="form-control"
@@ -35,7 +34,7 @@
                         <div class="col-sm">
                             <form id="comment-form">
                                 <div class="form-group">
-                                    <h6>Aktywność</h6>
+                                    <h5>Aktywność</h5>
                                     <Detail class="form-group details-group" v-for="detail in detailsList"
                                             v-bind:key="detail.id"
                                             v-bind:content="detail.content" v-bind:date="detail.addDate"
@@ -56,6 +55,7 @@
                         </div>
                         <div class="col-sm">
                             <div class="form-group">
+                                <h5>Załączniki</h5>
                                 <input type="file" ref="file" v-on:change="handleAddAttachment"/>
                                 <button type="button" v-on:click="parseAttachment" class="btn btn-info my-button">
                                     Dodaj
@@ -72,7 +72,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -176,9 +175,15 @@
             },
 
             downloadAttachments() {
-                var self = this
+                var self = this;
                 ApiClient.getAttachmentsForCard(this.cardId, function(response) {
-                    self.attachments = response
+                    self.attachments = response;
+                    // eslint-disable-next-line no-console
+                    console.log("ilosc zalacznikow: " + self.attachments.length);
+                    // eslint-disable-next-line no-console
+                    console.log("zalacznik pierwszy: " + self.attachments[0]);
+                    // eslint-disable-next-line no-console
+                    console.log("test");
                 })
             }
         },
