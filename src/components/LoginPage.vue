@@ -16,7 +16,7 @@
         </div>
         <div class="col-4 offset-1">
             <label class="login-title-label">Zarejestruj</label>
-            <form action="">
+            <form id="register-form" action="">
                 <div class="form-group">
                     <label class="login-label" for="inputRegistrationLogin">Login</label>
                     <input type="text" class="form-control" id="inputRegistrationLogin" aria-describedby="emailHelp" v-model="newUserName" placeholder="Wpisz swój login">
@@ -73,14 +73,19 @@
 
             registerUser() {
 
+                var self = this;
+
                 if (this.password.length >= 3) {
 
                     if (this.password === this.repeatedPassword) {
                         ApiClient.registerUser(this.newUserName, this.password, function(){
                             alert("Rejestracja przebiegła pomyślnie");
+                            self.newUserName ="";
+                            self.password = "";
+                            self.repeatedPassword = "";
                         }, function(response){
                             /* eslint-disable no-console */
-                            console.log("Rejestracja nieudana" + response);
+                            console.log("Rejestracja nieudana: " + response);
                             /* eslint-enable no-console */
                         })
                     } else {
