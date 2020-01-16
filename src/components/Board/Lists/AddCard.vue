@@ -29,6 +29,7 @@
 },
         methods: {
             showForm() {
+                this.title = "";
                 if (this.$el.querySelector("#showButton").style.display === "none") {
                     this.$el.querySelector("#showButton").style.display = "block"
                     this.$el.querySelector("#showFormAddCard").style.display = "none"
